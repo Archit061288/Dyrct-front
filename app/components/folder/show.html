@@ -1,0 +1,50 @@
+<div class="modal-header notes-popup-header">
+    <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+</div>
+<!-- modal content -->
+<div class="modal-body padd0 notes-popup">
+    <div class="clearfix wrapper-inner">
+        <div class="col-sm-6 col-xs-12 titleBlock leftbox" >
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="imgBlock"><img class="fullimage" src="assets/img/user_profile.png" ng-src="{{userdetail.profile_pic}}" alt=""></div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="">
+                        <div class="title-name">{{userdetail.firstName}} {{userdetail.lastname}}</div>
+                        <div class="divider"></div>
+                        <!--                         <div>archit.jain@indiainic.com</div>-->
+                        <div class="title-address">
+                            {{userdetail.address}}
+                            
+                        </div>
+                        <div class="title-phone">Phone - {{userdetail.phone}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12 titleBlock rightbox">
+
+            <div class="col-sm-12 notes-title text-left">Add Notes</div>
+            <div class="col-sm-12 notes-text">
+                <textarea cols="50" rows="5" readonly ng-model="notes" class="form-control">{{userdetail.note}}</textarea>
+            </div>
+            <!--<div ng-if="usercontact.note">{{usercontact.note}}</div>-->
+
+        </div>
+    </div>
+</div>
+<!-- modal footer -->
+<!-- <div class="modal-footer mdBdr-none">
+    <div class="row">
+        <hr>
+        <div class="col-md-12 text-center" ng-show="notes.length > 0">
+            <a >Close</a>
+        </div>
+        <div class="col-md-12 text-center" ng-show="notes.length == 0">
+            <a >Close</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+ <input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+          
+            <!-- modal header -->
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 class="modal-title" id="myModalLabel">Share</h3>
+              <div class="titleBlock m-top20">
+                <div class="row">
+                    <div class="col-md-5" ng-show="checktype == 'mycid'">Select People</div>
+                  <div class="col-md-7 text-right">
+                    <input type="text" ng-model="search.searchName" placeholder="Search here..">
+                    <a id="selectall" ng-click="selectAll()">Select all / </a><a id="deselectall" ng-click="deselectAll()">Deselect all</a> 
+                    <!--<a ng-model="selectedAll" ng-click="checkAll()">Select all</a>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- modal content -->
+            <div class="modal-body" id="boxscroll3">
+              <form action="" class="">
+                <div class="row formField">
+                  <ul class="listing listing2">
+                     
+                    <li class="clearfix" ng-if="contact.isUsingDYRCT == 'true' && checktype == 'mycid' && MyCID._id.$id != contact.userId && contact.profile_visibilty_flag == 'true'" ng-repeat="contact in usercontects | filter:search">
+                      <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                      <div class="pull-left usernames" ng-init="contact.searchName = contact.firstName + ' ' + contact.lastName">{{contact.firstName}} {{contact.lastName}}</div>
+                      <div class="pull-right">
+                          <input id="boxsharecid{{$index+ 'sharecid'+$index}}" type="checkbox" name="contactshare" value="{{contact.contact_id}}" ng-model="contact.checked" ng-click="checkedItems()">
+                        <!--<input id="box{{$index}}" class="checkBox" name="contact" type="checkbox" ng-checked="contact.Selected" ng-model="contact.Selected">-->
+                        <label for="boxsharecid{{$index+ 'sharecid'+$index}}"></label>
+                      </div>
+                    </li>
+                    <li class="homeerror" ng-if="!resultflag">No records found.</li>
+                  </ul>
+                </div>
+              </form>
+                <div class="transptant-overlay" >Select at least one Contact</div>
+            </div>
+            <!-- modal footer -->
+            <div class="modal-footer mdBdr-none">
+              <div class="row">
+                <div class="col-md-3">
+                  <p ng-if="checktype == 'mycid'">Selected <strong>{{selecteduser().length}}</strong></p>
+                  
+                </div>
+                <div class="col-md-9">
+                  <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                  <button type="button" class="btn btn-danger" ng-click="share()">Share</button>
+                </div>
+              </div>
+            </div>
+          
+        

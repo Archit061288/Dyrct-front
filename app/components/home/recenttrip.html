@@ -1,0 +1,70 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-2 col-sm-1 col-xs-1 hidden-xs">
+            <a href="javascript:void(0)" class="homeIcon">Home</a>
+        </div>
+        <div class="col-md-6 col-sm-8 col-xs-12 text-center tabs-middle">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" title="Contacts"  ui-sref-active="active"><a ui-sref="common.home" >Contacts</a></li>
+                <li role="presentation" title="POI"  ui-sref-active="active"><a ui-sref="common.poilistview"  >POI</a></li>
+                <li role="presentation" title="Recent Trips"  ui-sref-active="active"><a ui-sref="common.recenttrip" >Recent Trips</a></li>
+            </ul>
+        </div>
+<!--        <div class="col-md-2 text-center" >
+            
+</div>-->
+<div class="col-md-2 text-center" >
+<!--            <div class="btn-group bootstrap-select" ng-class="{'open':open}" style="margin-top: -3px;background-color: #fff;" >
+                            <button ng-click="toggleselect()" type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" data-id="selectBox" title="map view" aria-expanded="false">
+                                <a ui-sref="common.mapview"><span class="filter-option pull-left">Map View</span></a>&nbsp;
+                                <span class="caret"></span>
+                            </button>
+            <div class="dropdown-menu open" style="background-color: #fff;">
+                <ul class="dropdown-menu inner" role="menu">
+
+                    
+                    <li data-original-index="1" style="background-color: #fff;height: 37px;">
+                        <a tabindex="0" class="" style="text-align: left;" data-tokens="null">
+                            <span class="text" >List View</span>
+                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>-->
+    </div>
+    <div class="col-md-2 col-sm-2 col-sm-2 col-xs-2 text-right buttonbox-right home">
+<!--        <button data-dismiss="modal" ui-sref="common.poi" title="Create POI"  class="btn btn btn-danger small-btn" type="button">
+         <span class="btn-text">Create POI</span>
+         <i class="glyphicon glyphicon-plus"></i>
+     </button>-->
+ </div>
+</div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12" id="boxscroll2" getheight="userrecenttrip">
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+            <div   ui-sref-active="active">
+                <ul class="listing recenttrip">
+                    <li class="clearfix padd0" ng-show="trip.status == 'active'" ng-repeat="trip in userrecenttrip | filter:search">
+                        <div class="common-redbox clearfix">
+                            <div class="pull-left usernames" ng-init="trip.searchName=trip.title">{{trip.title}}<span>{{trip.address}}</span></div>
+                            <div class="btn-hover top32">
+                                <!--<a ng-click="openModalshow('trip',trip);"><button type="button" class="btn btn-gray viewBtn">SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>-->
+                                <!--<a ><button type="button" class="btn btn-gray viewBtn">SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>-->
+                                <a ng-click="deleterecenttrip(trip.trip_id)"><button type="button" title="Delete Recent Trip"  class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="homeerror" ng-if="!resultflag || userrecenttrip.length==0">No records found.</li>
+                </ul>
+            </div>
+        </div>
+        <!-- persnal detail -->
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search" class="ng-hide">
+<!-- modal header -->
+<div class="modal-header scheduler-date">
+    <!--<button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+    <h3 class="modal-title addshedule" id="myModalLabel">Add Schedule</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <input type="text" placeholder="Schedule title" name="Schedule title" ng-model="scheduler_title" ng-class="{'error':error}" class="form-control form-group">
+            </div>
+                <div class="form-group  addshedule-remind">
+                        <div class="btn-group bootstrap-select" ng-class="{'open':open}">
+                            <button ng-click="toggleselect()" type="button" ng-class="{'error':error}" class="btn dropdown-toggle btn-default" data-toggle="dropdown" data-id="selectBox" title="Select Reminder" aria-expanded="false">
+                                <span class="filter-option pull-left">{{schedular_reminder}}</span>&nbsp;
+                                <span class="caret"></span>
+                            </button>
+                            <div class="dropdown-menu open" style="max-height: 271px; overflow: hidden; min-height: 0px;">
+                                <ul class="dropdown-menu inner" role="menu" style="max-height: 259px; overflow-y: auto; min-height: 0px;">
+
+                                    <li ng-click="selectreminder(reminder)" ng-repeat="reminder in reminderoption" data-original-index="1">
+                                        <a tabindex="0" class="" style="" data-tokens="null">
+                                            <span class="text-name">{{reminder.name}}</span>
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <!--<input type="text" name="Reminder before" placeholder="Reminder before" ng-change="changed()" ng-model="schedular_reminder"  class="form-control form-group">-->
+            </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <span class="input-group-btn datepicker">
+                    <input type="text" class="form-control form-group" uib-datepicker-popup="{{format}}" ng-required="true" ng-click="openfrom($event)" ng-model="fromdatetime" placeholder="From Date" is-open="status.opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                    <button type="button" class="btn btn-default" ng-click="openfrom($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                </span>
+            </div>
+            <div class="form-group addshedule-enddate">
+                <span class="input-group-btn datepicker">
+                    <input type="text" class="form-control form-group" uib-datepicker-popup="{{format}}" min-date="{{fromdatetime}}" ng-class="{'error':errordate}" ng-required="true" ng-click="opento($event)" ng-model="todatetime" placeholder="To Date" is-open="status.opened1" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                    <button type="button" class="btn btn-default" ng-click="opento($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group timepicker-scheduler">
+                <uib-timepicker class="timepicker" ng-model="fromtimedate" ng-change="changed()"  show-meridian="ismeridian"></uib-timepicker>
+            </div>
+            <div class="form-group">
+                <uib-timepicker class="timepicker" ng-model="totimedate" ng-change="changed()"  show-meridian="ismeridian"></uib-timepicker>
+                <input type="hidden" ng-model="remaindertimedate" />
+            </div>
+        </div>
+    </div>
+
+    <div class="titleBlock m-top20">
+        <div class="row">
+            <div class="col-md-6" >Select <a  href="javascript:void(0)" style="color: #585757;"><span ng-class="{'contactactive':showdata}" ng-click="displaycontactdata('CID')">CID</span></a> / <a href="javascript:void(0)"  style="color: #585757;"><span ng-class="{'poiactive':!showdata}" ng-click="displaypoidata('POI')">POI</span></a></div>
+
+            <div class="col-md-6 text-right">
+                <input type="text" ng-model="search.searchName" placeholder="Search here..">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal content -->
+<div class="modal-body" id="boxscroll3" >
+    <div class="spinner-wrapper"  ng-show="loader"> 
+        <div id="spinner1">
+            <div class="loader" >
+                <img ng-src="assets/img/loader_outer.png">
+            </div>
+            <div class="center-loader">
+                <img ng-src="assets/img/loader-center.png" >
+            </div>
+        </div>
+    </div>
+    <form action="" class="" ng-show="showdata" >
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" ng-show="contact.isUsingDYRCT == 'true' && contact.profile_visibilty_flag == 'true' && MyCID._id.$id != contact.userId" ng-repeat="contact in contactdata| filter:search">
+                    <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                    <div class="pull-left usernames" ng-init="contact.searchName = contact.firstName + ' ' + contact.lastName">{{contact.firstName}} {{contact.lastName}}</div>
+                    <div class="pull-right" >
+                        <div class="radio"><input id="box{{$index + 'contactscheduler'}}" type="radio" name="contactscheduler" ng-value="contact.contact_id" ng-model="$parent.contactscheduler" ng-change="checkedItems(contact, 'contact')">
+                            <label for="box{{$index + 'contactscheduler'}}"></label></div>
+                    </div>
+                </li>
+                 <li class="homeerror" ng-if="!resultflag || contactdata.length == 0">No records found.</li>
+            </ul>
+        </div>
+    </form>
+    <form action="" class="" ng-show="!showdata">
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" ng-show="poi.status == 'active'" ng-repeat="poi in poidata| filter:search">
+                    <!--<div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{poi.poi_pic}}" height="45" width="45" alt=""></div>-->
+                    <div class="pull-left usernames" ng-init="poi.searchName = poi.title + ' ' + poi.address">{{poi.title}}<span>{{poi.address}}</span></div>
+                    <div class="pull-right">
+                        <div class="radio"><input id="box{{$index + 'poischeduler'}}" type="radio" name="contactscheduler" ng-value="poi.poi_id"  ng-model="$parent.contactscheduler" ng-change="checkedItems(poi, 'poi')">
+                            <label for="box{{$index + 'poischeduler'}}"></label></div>
+                    </div>
+                </li>
+                <li class="homeerror" ng-if="!resultflag || poidata.length == 0">No records found.</li>
+            </ul>
+        </div>
+    </form>
+</div>
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <div class="col-md-6 xs-hidden">
+            <p class="pull-left">Selected CID/POI <strong>{{Selectedname.name}}</strong></p>
+        </div>
+        <div class="col-md-6 col-xs-12 buttonbox">
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-click="Addscheduler()">Send</button>
+        </div>
+    </div>
+</div>
+
+

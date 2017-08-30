@@ -1,0 +1,154 @@
+
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-3 col-sm-1 col-xs-1 hidden-xs">
+            <a href="javascript:void(0)" class="homeIcon">PEOPLE</a>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 text-left tabs-middle">
+            <ul class="nav nav-tabs" role="tablist">
+                <!-- <li role="presentation" title="PEOPLE"  ui-sref-active="active"><a ui-sref="common.home" >PEOPLE</a></li>
+                <li role="presentation" title="PLACES"  ui-sref-active="active"><a ui-sref="common.poilistview"  >PLACES</a></li> -->
+                
+                <!--<li role="presentation" title="Recent Trips"  ui-sref-active="active"><a ui-sref="common.recenttrip" >Recent Trips</a></li>-->
+                <li class="peoplelist"><a href="javascript:void(0)" title="Dyrct Users" ng-show="imgactive" ng-click="activeuser('halfcont')" class="activeUser"><img src="assets/img/icon1.2.png" height="30" width="30" alt=""></a>
+                <a href="javascript:void(0)" title="Contact Book" ng-show="!imgactive" ng-click="activeuser('fullcont')"><img src="assets/img/icon2.2.png" height="30" width="30" alt="" class="activeUser" ></a></li>
+        
+            </ul>
+        </div>
+        <div class="col-md-1 col-sm-2 col-sm-2 col-xs-2 text-right buttonbox-right invidetodyrct">
+           <button class="btn btn btn-danger small-btn" title="invitedyrct" ng-click="sendSms()" ng-disabled="!iodshow">
+                <span class="btn-text">Invite to DYRCT</span>
+                <i class="glyphicon glyphicon-move"></i>
+            </button>
+        </div>
+<!--        <div class="col-md-2 text-center">
+                        <div class="btn-group bootstrap-select" ng-class="{'open':open}" style="margin-top: -3px;background-color: #fff;" >
+                                        <button ng-click="toggleselect()" type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" data-id="selectBox" title="map view" aria-expanded="false">
+                                            <a ui-sref="common.mapview"><span class="filter-option pull-left">Map View</span></a>&nbsp;
+                                            <span class="caret"></span>
+                                        </button>
+                        <div class="dropdown-menu open" style="background-color: #fff;">
+                            <ul class="dropdown-menu inner" role="menu">
+            
+                                
+                                <li data-original-index="1" style="background-color: #fff;height: 37px;">
+                                    <a ui-sref="common.poilistview" tabindex="0" class="" style="text-align: left;" data-tokens="null">
+                                        <span class="text" >List View</span>
+                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-3 text-right buttonbox-right home">
+                    <button data-dismiss="modal" ui-sref="common.poi" title="Create POI" class="btn btn btn-danger small-btn" type="button">
+                        <span class="btn-text">Create POI</span>
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </div>-->
+            </div>
+        </div>
+        <div class="clearifx"></div>
+        <div class="right-col home-page">
+            <div class="wideColume col-md-12" id="boxscroll2" getheight="usercontects">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div  ui-sref-active="active">
+                        <ul class="listing my-cid">
+                            <li class="clearfix padd0" >
+                             <div class="common-redbox clearfix">
+                                <span class="az"></span>
+                                <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{MyCID.profile_pic}}" height="45" width="45" alt=""></div>
+                                <div class="pull-left usernames" ><a ui-sref="common.mycid">MY CID</a></div>
+                                <div class="btn-hover">
+                                    <a ng-click="openModalsharemycid('mycid', MyCID._id);"><button type="button" title="Share MYCID" class="btn btn-gray share-icon" data-target=".share" data-toggle="modal"><img src="assets/img/icon01.png" height="19" width="14" alt=""></button></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div  ui-sref-active="active">
+                    <ul class="listing dyrct_popup_listing" id="dyrct_popup_listing">
+                        <li class="clearfix padd0" ng-repeat="contact in usercontects " ng-show="!dyrctuser ? 'resultflag' : contact.isUsingDYRCT == 'true' " ng-if="MyCID._id.$id != contact.userId">
+                            <div class="common-redbox clearfix">
+                                <span class="az">{{contact.first_letter}}</span>
+                                <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                                <div  class="pull-left usernames" ng-init="contact.searchName = contact.firstName + ' ' + contact.lastName">{{contact.firstName}} {{contact.lastName}}</div>
+                                <div  class="btn-hover" ng-show="contact.isUsingDYRCT == 'true'">
+                                    <!--<a ng-click="openModalshow('contact', contact);">-->
+                                    <a ng-click="dyrctshow(contact,$index,'cid')">
+                                        <button type="button" class="btn btn-gray dyrct_popup_btn dyrct_popup_btnd_{{$index}}" title="Show CID" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                                    </a>
+                                    <!--</a>-->
+                                    <!--<button ng-init="contact.isOpen=myPopover.isOpen" popover-placement="left" popover-template="myPopover.templateUrl" ng-click="showdata(contact)" popover-label="Label" type="button" class="btn btn-gray" >SHOWW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+
+
+                                    <!--</a>-->
+                                    <a ng-click="openModalInvitePOI(contact.userId)"><button type="button" title="Invite CID" class="btn btn-gray plus-icon2">INVITE</button></a>
+                                    <a ng-click="openModalshare('contact', contact.contact_id, contact.userId);"><button type="button" title="Share CID" class="btn btn-gray share-icon" data-target=".share" data-toggle="modal"><img src="assets/img/icon01.png" height="19" width="14" alt=""></button></a>
+                                    <!--                                    <a ng-click="deletecontact(contact.contact_id)"><button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>-->
+                                </div>
+                                <div class="pull-right" ng-show="contact.isUsingDYRCT != 'true'">
+                                    <input id="box{{$index + 'contact'}}" type="checkbox" class="checkBox" name="invitecont" ng-checked="contact.checked" ng-model="contact.checked" value="{{contact.contact_id}}" ng-click="checkedcontactItems(contact.contact_id,contact.checked)">
+                                    <label for="box{{$index + 'contact'}}"></label>
+<!--                                    <a ng-click="sendSms(contact.phone)" target="_top" class="invite pull-left" style="margin-top: 7px;">Invite to DYRCT <i class="glyphicon glyphicon-chevron-right"></i> </a>-->
+                                    <!--                                    <a ng-click="deletecontact(contact.contact_id)"><button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>-->
+                                </div>
+                            </div>
+                            </li>
+                            <li class="homeerror" ng-if="usercontects.length==0">No records found.</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- persnal detail -->
+            </div>
+        </div>
+        <div class="dyrct_popup" id="dyrct_popup" ng-show="showpopover">
+            <div class="popup_bg" ng-click="closepopup(usercontactshowdata.contact_id, 'contact')"></div>
+            <div class="custom_popup">
+                <a class="close_popup" ng-click="closepopup(usercontactshowdata.contact_id, 'contact')">X</a>
+                <div class="arrow_black"></div>
+                <div class="content_left">
+                 <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="imgBlock">
+                            <img class="fullimage" src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.profile_pic}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="">
+                            <div class="title-name">{{usercontactshowdata.firstName}} {{usercontactshowdata.lastName}}</div>
+                            <div class="divider" ng-if="dyrctaddcity">{{usercontactshowdata.city}},{{usercontactshowdata.state}},{{usercontactshowdata.country}}</div>
+                            <div class="title-email">{{usercontactshowdata.email}}</div>
+                            <div class="title-address" ng-if="dyrctadd">{{usercontactshowdata.address}}</div>
+                            <div class="title-phone">Phone - {{usercontactshowdata.phone}}</div>
+                            <div class="title-phone" ng-if="usercontactshowdata.alt_phone != ''">Alternate Number -  {{usercontactshowdata.alt_phone}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_right">
+             <!--    <div class="col-sm-12 notes text-left">Add Notes 
+                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(usercontactshowdata.contact_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-12 notes-text">
+                        <h6>Add Private Note</h6>
+                         <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control height100"></textarea>
+                    <h6>Add Public Note</h6>
+                        <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.public_note" ng-focus="focus()" ng-blur="blur()" class="form-control height100"></textarea>
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>

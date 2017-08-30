@@ -1,0 +1,126 @@
+<div class="top-header ltr-logo">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <ul class="navbar-header pull-left">
+                <li><a class="nav-icon" ng-click="open()"><img src="assets/img/menu-icon.png" height="12" width="15" alt=""></a></li>
+                <li><a href="javascript:void(0)" class="pull-left menu-icon"><img src="assets/img/menu-icon.png" height="12" width="15" alt=""></a></li>
+                <li><a class="navbar-brand" href="javascript:void(0)"><img src="assets/img/logo.png" height="40" width="130" alt=""></a></li>
+            </ul>
+            <div class="topSearch" ng-show="topsearch">
+                <div ui-view="search"></div>
+            </div>
+            <div id="" class="pull-right">
+                <form class="m-top5">
+                    <ul class="accountSection clearfix">
+                        <li uib-dropdown is-open="status.isopen">
+                            <a class="alert-icon" title="Notification" id="simple-dropdown" uib-dropdown-toggle ng-click="notificationcall()"><span class="nf-counter" ng-if="notificationlist.length > 0"><i>{{notificationlist.length}}</i></span></a>
+                            
+                            <ul class="uib-dropdown-menu notification" aria-labelledby="simple-dropdown">
+                                <li class="notification-li">
+                                    <ul>
+                                        <li class="notification-inner red rounded" ng-repeat="notification in notificationlist | orderBy:'-timestamp'">
+                                            <div class="">
+                                                <span class="datetime ">{{notification.timestamp * 1000| date:'dd-MMM-yyyy'}} - {{notification.timestamp * 1000| date:'h:mm a'}}</span>
+                                                <p class="msg-text">{{notification.message}} <span>{{notification.sender_name}}</span></p>
+                                                <div class="option-btns">
+                                                    <span class="pull-left"><a class="note-btn-block" ng-if="notification.method_type != 'group_leave' && notification.method_type != 'invite_ice'" ng-click="blocknotification(notification, $event)"></a></span>
+                                                    <span class="divider-bar">|</span>
+                                                    <span class="pull-right">
+                                                        <span class="divider-bar">|</span>
+                                                        <a href="" class="note-btn-deny" ng-if="notification.method_type != 'share_group'" ng-click="rejectnotification(notification, $event)"></a>
+                                                        <a href="" class="note-btn-deny" ng-if="notification.method_type == 'share_group'" ng-click="rejectnotification(notification, $event)"></a>
+                                                        <span class="divider-bar">|</span>
+                                                        <a href="" class="note-btn-accept"  ng-if="notification.method_type != 'group_leave' && notification.method_type != 'invite_ice'" ng-click="acceptnotification(notification, $event)"></a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="notification-inner red rounded" ng-show="notificationlist.length == 0">
+                                            <div class="noNotification">No Notification Found !!</div>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                                <div class="Notification-setting">
+                                <div class="pull-left"><i class="fa fa-bell-o"></i> Notification History </div><a href="javascript:void(0)" ui-sref="common.notificationhistory"><i class="fa fa-tasks pull-right m-top5"></i></a>
+                                </div>
+                            </ul>
+                        </li>
+                        <li>
+                            <a ui-sref="common.logout" class="logout" title="Logout">LOG OUT</a>
+                        </li>
+                        
+                    </ul>
+                    
+                </form>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
+</div>
+<div class="container-fluid m-top69">
+    <div class="row">
+        <div class="left-col-3 mobile-menu" ng-class="{'open':openclass}">
+            <div class="left-col">
+                <ul class="left-nav menu-head" >
+                    <li class="createCid" ui-sref-active="active" ng-show="check"><a ui-sref="common.usercid" >MY PROFILE</a></li>
+                    <li class="myCid cover-image" ui-sref-active="active" ng-show="!check">
+                        <a ui-sref="common.mycid" >
+                            <div class="background" style="background:url('{{mycid.profile_pic}}');background-size: 100% 100%;"></div>
+                            <div class="message">
+                                <div class="imgProfile pull-left"><img  ng-src="{{mycid.profile_pic}}" src="assets/img/profilePic5.png" width="35px" height="35px"/></div>
+                                <div class="pull-left userprofile">{{mycid.first_name}} {{mycid.last_name}}</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!--<span class="userprofileCid">MY CID</span>-->
+                <ul class="left-nav left-nav-list" >
+                    <li class="people" ng-class="{'active':routehome}"><a ui-sref="common.home">PEOPLE</a></li>
+                    <li class="places" ng-class="{'active':routepoi}"><a ui-sref="common.poilistview">PLACES</a></li>
+                    <li class="ice" ng-class="{'active':routeice}"><a ui-sref="common.icelistview">ICE</a></li>
+                    <!--<li class="scheduler" ui-sref-active="active"><a ui-sref="common.scheduler">Scheduler</a></li>-->
+                    <li class="folders" ng-class="{'active':routefolder}"><a ui-sref="common.folder">Folders</a></li>
+                    
+                      
+
+                    <!-- <li class="logBook" ng-class="{'active':routelog}"><a ui-sref="common.logbook" analytics-on="click" analytics-event="LOGBOOK" analytics-category="LOGBOOK" analytics-label="LOGBOOK">Log Book</a></li> -->
+                   <!--  <li class="groups" ng-class="{'active':routegroup}"><a ui-sref="common.groups">Groups</a></li> -->
+                    
+                    <li class="settings" ng-class="{'active':routesetting}"><a ui-sref="common.setting">Settings</a></li>
+                    <li class="mbmenu-notification" ui-sref-active="active" ui-sref="common.notification">
+                        <a title="Notification">
+                            Notification
+                            <span class="nf-counter" ng-if="notificationlist.length > 0">
+                                <i>{{notificationlist.length}}</i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="mbmenu-logout" ui-sref-active="active"><a  ui-sref="common.logout">Log Out</a></li>
+                </ul>
+            </div>
+
+        </div>
+        
+<!--        <div class="right-col-3 spinner-wrapper" ng-if="(trafloader==true)?false:trafficCop.pending.all > 0">-->
+<div class="right-col-3 spinner-wrapper" ng-show="trafficCop.pending.all > 0">
+            <div id="spinner" >
+                <div class="loader" >
+                    <img ng-src="assets/img/loader_outer.png">
+                </div>
+                <div class="center-loader">
+                    <img ng-src="assets/img/loader-center.png" >
+                </div>
+            </div>
+        </div>
+        <!-- ng-hide="trafficCop.pending.all > 0"  -->
+        <div ui-view="front" class="right-col-3 frontview"  ng-class="{'menu-open':openclass}">
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<div  ng-click="open()" class="mb-layer"></div>

@@ -1,0 +1,107 @@
+
+<style>
+    .angular-google-map-container { height: 400px; }
+    #map_canvas{height:100%;margin:0;}
+.centerMarker{
+  position:absolute;
+  /*url of the marker*/
+  background:url(assets/img/map-point.png) no-repeat center center; display: block; z-index: 9999;  /*center the marker*/  top:50%;left:50%;  height:98px;  width:30px;  cursor:pointer;
+}
+</style>
+
+
+<div class="modal-header">
+    <h3 class="modal-title" id="myModalLabel">Edit Address</h3>
+</div>
+<!-- modal content -->
+<div class="modal-body" id="boxscroll4">
+    <form action="" class="" novalidate name="addaddress">
+        <div class="col-lg-12 col-sm-12">
+            <a href="javascript:void(0)" class="centerMarker"></a>
+            <div ng-if="showmap" class="map padd-bottom20">
+                <!--                <ng-map zoom="14" center="37.7699298,-122.4469157" height="403" width="640" alt="Map">
+                
+                                    <directions 
+                                        draggable="true"
+                                        panel="directions-panel"
+                                        origin="Shivranjani Society, Jodhpur, Ahmedabad, Gujarat"
+                                        >
+                                    </directions>
+                                </ng-map>-->
+                <ui-gmap-google-map
+                    center="map.center"
+                    zoom="map.zoom"
+                    dragging="map.dragging"
+                    bounds="map.bounds"
+                    events="map.events"
+                    refresh="map.refresh"
+                    options="map.options"
+                    pan="true"
+                    control="map.control"
+                    >
+<!--                    <ui-gmap-markers models="markers" events="markerOptions.events" options="markerOptions" coords="'self'"  icon="'icon'"  >
+                    </ui-gmap-markers>-->
+
+
+                </ui-gmap-google-map>
+            </div>                  
+        </div>
+        <div class="personal-addressSearch">
+            
+            <!--<google-places ng-model="address" name="address" location=location class="form-control" placeholder="Enter Address"></google-places>-->
+            <google-places type="text" ng-model="address" class="searchFields searchFields2" placeholder="Search starting point" location="location"></google-places>
+        </div>
+        <div class="formField">
+            <div class="col-md-12">
+                <div class="form-group clearfix">
+                    <input type="text" class="form-control" ng-model="personaladdress" name="personaladdress"  id="" placeholder="Address..">
+                </div>
+            </div>
+        </div>
+        
+       
+        <div class="formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="country" name="country" id="" placeholder="Country">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="state" name="state" id="" placeholder="State">
+                </div>
+            </div>
+        </div>
+        <div class="formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" class="form-control" ng-model="city" name="city" id="" placeholder="City">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" class="form-control" ng-model="zipcode" name="zipcode" id="" placeholder="Zipcode">
+                </div>
+            </div>
+        </div>
+        <div class="formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-hide="true" ng-model="latitdlongitd" name="latlong" id="" placeholder="lanlong">
+                </div>
+            </div>
+        </div>
+        
+
+
+    </form>
+</div>
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default" title="Cancel"  ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" title="Submit" ng-disabled="(addaddress.$invalid)" ng-click="saveaddress()">Save</button>
+        </div>
+    </div>
+</div>

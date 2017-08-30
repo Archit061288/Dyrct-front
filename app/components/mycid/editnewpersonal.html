@@ -1,0 +1,175 @@
+
+<style>
+    .angular-google-map-container { height: 400px; }
+</style>
+
+<!--<div class="modal fade addNew" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                 modal header 
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h3 class="modal-title" id="myModalLabel">Add New Personal Address</h3>
+                </div>
+                 modal content 
+                <div class="modal-body">
+                  <form action="" class="">
+                    <div class="row formField">
+                      <div class="col-md-12">
+                        <div class="form-group clearfix">
+                          <input type="text" class="form-control" id="" placeholder="Address..">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row formField">
+                      <div class="col-md-6">
+                        <div class="form-group clearfix">
+                          <input type="text" class="form-control" id="" placeholder="Country">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group clearfix">
+                          <input type="text" class="form-control" id="" placeholder="State">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row formField">
+                      <div class="col-md-6">
+                        <div class="form-group clearfix">
+                          <input type="text" class="form-control" id="" placeholder="City">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group clearfix">
+                          <input type="text" class="form-control" id="" placeholder="Zipcode">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                 modal footer 
+                <div class="modal-footer mdBdr-none">
+                  <div class="row">
+
+                    <div class="col-md-12">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-danger">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+
+<div class="modal-header">
+    <h3 class="modal-title" id="myModalLabel">Edit Personal Address</h3>
+</div>
+<!-- modal content -->
+<div class="modal-body" id="boxscroll4">
+    <form action="" class="" novalidate name="addaddress">
+        <div class="row formField">
+            <div class="col-md-12">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="companyname" name="companyname" ng-class="{'error':(addaddress.address.$dirty && error)}" id="" placeholder="Title..">
+                </div>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-12">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="personaladdress" name="personaladdress" ng-class="{'error':(addaddress.address.$dirty && error)}" id="" placeholder="Address..">
+                </div>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" showonly-digits ng-model="phonenumber" name="phonenumber" ng-class="{'error': addaddress.phonenumber.$invalid && phoneerror}" id="phonenumber" placeholder="Mobile Number">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <!--<input type="email" required ng-pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" class="form-control" ng-class="{'error': emailerror }" ng-model="email" name="email" id="" placeholder="Email">-->
+                    <input type="email" required ng-pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/" class="form-control" ng-class="{'error': emailerror && addaddress.email.$invalid}"  ng-model="email" name="email" id="" placeholder="Email"> 
+<!--                    <span  ng-show="emailerror" class="text text-danger">Invalid E-mail Id</span>-->
+                </div>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="country" name="country" id="" placeholder="Country">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="state" name="state" id="" placeholder="State">
+                </div>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="city" name="city" id="" placeholder="City">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-model="zipcode" name="zipcode" id="" placeholder="Zipcode">
+                </div>
+            </div>
+        </div>
+        <div class="row formField">
+            <div class="col-md-6">
+                <div class="form-group clearfix">
+                    <input type="text" required class="form-control" ng-hide="true" ng-model="latitdlongitd" name="latlong" id="" placeholder="lanlong">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-sm-12">
+            <div ng-if="showmap" class="map">
+                <!--                <ng-map zoom="14" center="37.7699298,-122.4469157" height="403" width="640" alt="Map">
+                
+                                    <directions 
+                                        draggable="true"
+                                        panel="directions-panel"
+                                        origin="Shivranjani Society, Jodhpur, Ahmedabad, Gujarat"
+                                        >
+                                    </directions>
+                                </ng-map>-->
+                <ui-gmap-google-map
+                    center="map.center"
+                    zoom="map.zoom"
+                    dragging="map.dragging"
+                    bounds="map.bounds"
+                    events="map.events"
+                    refresh="map.refresh"
+                    options="map.options"
+                    pan="true"
+                    control="map.control"
+                    >
+                    <ui-gmap-markers models="markers" events="markerOptions.events" options="markerOptions" coords="'self'"  icon="'icon'"  >
+                    </ui-gmap-markers>
+
+
+                </ui-gmap-google-map>
+            </div>                  
+        </div>
+        <div class="personal-addressSearch">
+            
+            <!--<google-places ng-model="address" name="address" location=location class="form-control" placeholder="Enter Address"></google-places>-->
+            <google-places type="text" ng-model="address" class="searchFields searchFields2" placeholder="Search starting point" location="location"></google-places>
+        </div>
+
+
+    </form>
+</div>
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default" title="Cancel"  ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" title="Submit"  ng-click="editpersonaladd()">Submit</button>
+        </div>
+    </div>
+</div>

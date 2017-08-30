@@ -1,0 +1,8 @@
+<h1>Poi listing</h1>
+<input type="text" name="search" ng-model="test" value="search" />
+<div ng-repeat="values in poiListData | filter:test" >
+    {{ values.title }}
+</div> 
+<button ng-click="changeMethod()">here</button>
+
+

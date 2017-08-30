@@ -1,0 +1,158 @@
+
+define(['angularAMD', 'bootstrap-select', 'components/usersignup/usersignupCtrl', 'components/userlogin/userloginCtrl'], function(angularAMD) {
+//    angularAMD = angular.module('MainController', ['ngCookies', 'commonServices']);
+
+    angularAMD.controller('mainLayoutCtrl', ['$scope', '$rootScope', '$cookies', '$cookieStore', '$state', 'authService', 'resourceService', "$uibModal", "dyrctservice", function($scope, $rootScope, $cookies, $cookieStore, $state, authService, resourceService, $uibModal, dyrctservice) {
+            $scope.items = ['item1', 'item2', 'item3'];
+//    $('body').find('div.modal-backdrop').remove();
+            $('body').click(function() {
+                $('body').find('div.modal-backdrop').remove();
+            });
+            $('body').find('div.fade').remove();
+//    $('body').find('.modal').removeClass('modal-backdrop');
+            $scope.tabClass1 = true;
+            $scope.tab = function(tab) {
+                if (tab == 'tab1') {
+                    $scope.tabClass1 = true;
+                    $scope.tabClass2 = false;
+                    $scope.tabClass3 = false;
+                }
+                if (tab == 'tab2') {
+                    $scope.tabClass1 = false;
+                    $scope.tabClass2 = true;
+                    $scope.tabClass3 = false;
+                }
+                if (tab == 'tab3') {
+                    $scope.tabClass1 = false;
+                    $scope.tabClass2 = false;
+                    $scope.tabClass3 = true;
+                }
+            }
+
+
+            $("#intro_link").click(function() {
+                var offset = $("#intro").offset();
+                $("html, body").animate({scrollTop: offset.top}, "slow");
+            });
+            $("#features_link").click(function() {
+                var offset = $("#features").offset();
+                $("html, body").animate({scrollTop: offset.top}, "slow");
+            });
+
+            $scope.dismissModel = function(glu) {
+                if (glu == 'outside') {
+                    console.log("in");
+                    $('body').find('div.modal-backdrop').css('z-index', '-1 !important');
+//            $('body').find('div.modal-backdrop').remove();
+                    console.log("out");
+                    $uibModal.close();
+                }
+            }
+	    $scope.readmoreflag = false;
+$scope.readmore = function(){
+$scope.readmoreflag = true;
+}
+            $scope.animationsEnabled = true;
+            $scope.signup = function(signforgot) {
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: "app/components/usersignup/usersignup.html",
+                    controller: "userloginCtrl",
+                    size: 'lg',
+                    resolve: {
+                        getcountrydata: function(modifires, $stateParams) {
+                            return modifires.getcountry();
+                        },
+                        signfor:function(){
+                            return signforgot;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function(selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function() {
+                    modalInstance.dismiss();
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
+
+
+            }
+
+            $scope.login = function() {
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: "app/components/userlogin/userlogin.html",
+                    controller: "userloginCtrl",
+                    size: 'lg',
+                    resolve: {
+                        getcountrydata: function(modifires, $stateParams) {
+                            return modifires.getcountry();
+                        },
+                        signfor:function(){
+                            return [];
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function(selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function() {
+                    modalInstance.close();
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
+
+
+            }
+            $scope.disclaimer = function() {
+                var modalInstance = $uibModal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: "app/components/usersignup/disclaimer.html",
+                    controller: "userloginCtrl",
+                    size: 'lg',
+                    resolve: {
+                        getcountrydata: function(modifires, $stateParams) {
+                            return modifires.getcountry();
+                        },
+                        signfor:function(){
+                            return [];
+                        }
+                    }
+                });
+                modalInstance.result.then(function(selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function() {
+                    modalInstance.dismiss();
+                    //$log.info('Modal dismissed at: ' + new Date());
+                });
+            }
+            $scope.contactus = function() {
+                var contact = {};
+                contact.post_data_string = {
+                    "method": "mailToAdmin",
+                    "web_token": "",
+                    "userId": "",
+                    "email": $scope.email,
+                    "first_name": $scope.firstname,
+                    "last_name": $scope.lastname,
+                    "comment": $scope.comment
+                }
+                dyrctservice.post(contact, function(success) {
+                    // $uibModalInstance.close();
+                    if (success.data.message == 'Mail Send Successfully.')
+                    {
+                        alert("Mail sent successfully.");
+//                        $scope.email = "";
+//                        $scope.firstname = "";
+//                        $scope.lastname = "";
+//                        $scope.comment = "";
+                           //delete $scope.firstname;
+                    }
+                }, function(error) {
+                    console.log(error);
+                });
+            }
+        }]);
+
+
+});

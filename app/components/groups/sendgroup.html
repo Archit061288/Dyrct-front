@@ -1,0 +1,107 @@
+          
+<!-- modal header -->
+<div class="modal-header">
+    <!--<button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+    <h3 class="modal-title" id="myModalLabel">Send</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <span class="input-group-btn datepicker">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-click="open($event)" ng-model="selectdate" is-open="status.opened" min-date="currentdatetimenow" show-weeks="false" show-button-bar="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-text="Close" />
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    
+                </span>
+                
+                <!--<input type="text" placeholder="Select Date" name="Select Date" ng-model="selectdate" class="form-control form-group">-->
+                <uib-timepicker class="timepicker" ng-model="selecttime" ng-change="changed()"  show-meridian="ismeridian" ng-class="{'error':errortime}"></uib-timepicker>
+                <span  ng-show="errortime" class="text text-danger">{{errortimemessage}}</span>
+                <!--<input type="number" name="Select Time" placeholder="Select Time"  ng-model="selecttime" class="form-control form-group">-->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <textarea cols="38" ng-class="{'error':contacterror}" rows="5" class="description" ng-model="description" placeholder="Your message here.." ></textarea>
+                <span  ng-show="contacterror" class="text text-danger">{{messageerror}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="titleBlock m-top20">
+        <div class="row">
+            <div class="col-md-6" >Select <a href="javascript:;"><span ng-class="{'contactactive':showdata}" ng-click="displaycontactdata()">Contact</span></a> / <a href="javascript:;"><span ng-class="{'poiactive':!showdata}" ng-click="displaypoidata()">Address</span></a></div>
+
+            <!--                  <div class="col-md-6 text-right">
+                                <input type="text" ng-model="search" placeholder="Search here..">
+                              </div>-->
+        </div>
+    </div>
+</div>
+<!-- modal content -->
+<div class="modal-body" id="boxscroll3"  >
+    <div class="spinner-wrapper"  ng-show="loader"> 
+<div id="spinner1">
+                <div class="loader" >
+                    <img ng-src="assets/img/loader_outer.png">
+                </div>
+                <div class="center-loader">
+                    <img ng-src="assets/img/loader-center.png" >
+                </div>
+</div>
+</div>
+    <form action="" class="" ng-show="showdata">
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" >
+                    <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{MyCID.profile_pic}}" height="45" width="45" alt=""></div>
+                    <div class="pull-left usernames">MyCID</div>
+                    <div class="pull-right">
+                        <div class="radio"><input id="box{{'contactsendgroupMYCID'}}" type="radio" name="contactsendgroup" ng-value="MyCID._id.$id" ng-model="contactsendgroup" ng-change="checkedItems(MyCID._id.$id,'contact',MyCID.first_name +' '+ MyCID.last_name)">
+                            <label for="box{{'contactsendgroupMYCID'}}"></label></div>
+                    </div>
+                        
+                </li>
+                <li class="clearfix" ng-show="contact.isUsingDYRCT == 'true' && MyCID._id.$id != contact.userId && contact.profile_visibilty_flag == 'true'" ng-repeat="contact in contactdata | orderBy:'firstName'">
+                    <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                    <div class="pull-left usernames">{{contact.firstName}} {{contact.lastName}}</div>
+                    <div class="pull-right">
+                        <div class="radio"><input id="box{{$index + 'contactsendgroup'}}" type="radio" name="contactsendgroup" ng-value="contact.contact_id" ng-model="$parent.contactsendgroup" ng-change="checkedItems(contact.contact_id,'contact',contact.firstName +' '+ contact.lastName)">
+                            <label for="box{{$index + 'contactsendgroup'}}"></label></div>
+                    </div>
+                        
+                </li>
+
+            </ul>
+        </div>
+    </form> 
+    <div class="transptant-overlay " >Select at least one Contact</div>
+    <form action="" class="" ng-show="!showdata">
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" ng-show="poi.status == 'active'" ng-repeat="poi in poidata | orderBy:'title'">
+                    <!--<div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{poi.poi_pic}}" height="45" width="45" alt=""></div>-->
+                    <div class="pull-left usernames">{{poi.title}}<span>{{poi.address}}</span></div>
+                    <div class="pull-right">
+                        <div class="radio"><input id="box{{$index + 'poisendgroup'}}" type="radio" name="contactsendgroup" ng-value="poi.poi_id"  ng-model="$parent.contactsendgroup" ng-change="checkedItems(poi.poi_id,'poi',poi.title)">
+                            <label for="box{{$index + 'poisendgroup'}}"></label></div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </form>
+</div>
+
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="pull-left">Selected CID/POI <strong>{{cid_poi.name}}</strong></p>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-click="sendgroup()">Send</button>
+        </div>
+    </div>
+</div>
+
+

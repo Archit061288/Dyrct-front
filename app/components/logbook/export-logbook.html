@@ -1,0 +1,119 @@
+ 
+          
+            <!-- modal header -->
+            <div class="modal-header">
+              <h3 class="modal-title" id="myModalLabel">Export Trips</h3>
+              
+                <div class="row">
+                  
+                    <div class="col-md-5">
+                        <div class="form-group" >
+                            <span class="input-group-btn datepicker">
+                            <input type="text" ng-disabled="!showtext" class="form-control" uib-datepicker-popup="{{format}}" ng-click="open($event)" ng-model="startdate" is-open="status.opened" max-date="maxDate"  show-weeks="false" show-button-bar="false"  date-disabled="disabled(date, mode)"  close-text="Close" />
+                                <button type="button" ng-disabled="!showtext"  class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                            </span>
+                            <span  ng-show="expstartdate" class="text text-danger">{{messageerror}}</span>                            
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group" >
+                            <span class="input-group-btn datepicker">
+                            <input type="text" ng-disabled="!showtext" class="form-control" uib-datepicker-popup="{{format}}" ng-click="open1($event)" ng-model="enddate" is-open="status1.opened" max-date="maxDate" show-weeks="false" show-button-bar="false" date-disabled="disabled(date, mode)"  close-text="Close" />
+                                <button type="button" ng-disabled="!showtext"  class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+
+                            </span>
+                            <span  ng-show="expenddate" class="text text-danger">{{messageerror}}</span>                            
+                        </div>
+                    </div>  <div class="col-md-2">
+                        <input type="checkbox" ng-model="previewcheck.checked" value="previewcheck.checked" ng-click="previewtripclick(previewcheck.checked)" style="display: block;height:25px;width:25px;margin: 16px 0 0 0px;">
+                        </div>
+<!--                    <div class="col-md-2">
+                        <button type="button" ng-show="!showCategory"  title="Logbook Preview" class="btn btn-gray dyrct_popup_btn m-top10" ng-click="previewTrip()">Preview</button>
+                        <button type="button" ng-show="showCategory" title="Logbook Preview" class="btn btn-gray dyrct_popup_btn m-top10" ng-click="previewCategory()">Preview</button>
+                    </div>-->
+                </div>
+              
+                <div class="titleBlock m-top20">
+                    <div class="row">
+                      <div class="col-md-6" ng-show="!showCategory">Recent Trips Preview</div>
+                      <div class="col-md-6" ng-show="showCategory">Select Categories Preview</div>
+
+                      <div class="col-md-6 text-right" ng-show="showCategory">
+                        <a href="javascript:;" id="selectall" ng-click="selectAll()">Select all / </a><a href="javascript:;" id="deselectall" ng-click="deselectAll()">Deselect all</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- modal content -->
+            <div class="modal-body exportLogBook" id="boxscroll3">
+                
+                <div class="expListing" ng-show="showCategory">
+                    
+                    <div class="panel-group">
+                        <div class="panel panel-default" ng-init="categorydata.parentid=$index" ng-repeat="categorydata in exportCategoryPreview">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="" tabindex="0" ng-click="checkBoxToggle(categorydata)">
+                                      <span ng-class="{'text-muted': isDisabled}" class="ng-binding"><span>{{categorydata.category_name}} </span><i class="pull-left glyphicon ng-scope glyphicon-chevron-right" ng-class="{'glyphicon-chevron-down': categorydata.is_open, 'glyphicon-chevron-right': !categorydata.is_open}"></i></span>
+                                  </a>
+                                  <div class="pull-right expCheckBox">
+                                    <input  id="box{{$index + ''+categorydata.parentid+'export-logbook'}}" class="checkBox" type="checkbox" value="{{categorydata._id}}"  ng-change="checkedItems()" ng-checked="categorydata.checked" ng-model="categorydata.checked" />                              
+                                    <label for="box{{$index + ''+categorydata.parentid+'export-logbook'}}" class="pull-right"></label>                                                                    
+                                  </div>
+                                </h4>
+                            </div>
+                          
+                            <div class="panel-body" ng-show="categorydata.is_open">
+                                <ul class="listing">
+                                    <li class="clearfix" ng-if="categorydata.logbooklist.length > 0 && logbook.trip_status=='end'" ng-repeat="logbook in categorydata.logbooklist">
+                                        <div class="pull-left usernames">{{logbook.title}}<span>{{logbook.expected_address}}</span></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>                                                                       
+                    </div>
+                </div>
+                
+                <form action="" class="" ng-if="showCategory && exportCategoryPreview.length==0">
+                    <div class="row formField">                        
+                        <ul class="listing listing2">
+                            <li class="homeerror" ng-if="exportCategoryPreview.length==0">No categories found.</li>                            
+                        </ul>
+                    </div>
+                </form>
+                
+                <form action="" class="" ng-show="!showCategory">
+                    <div class="row formField">                        
+                        <ul class="listing listing2">
+                            <li class="clearfix" ng-repeat="logbook in exportLogBookDataPreview" ng-if="logbook.category_id == 0 && logbook.trip_status=='end'">
+                               <div class="pull-left usernames">{{logbook.title | limitTo: 80}}<span>{{logbook.expected_address}}</span></div>
+                            </li>
+                            <li class="homeerror" ng-if="exportLogBookDataPreview.length==0">No trip found.</li>                            
+                        </ul>
+                    </div>
+                </form>   
+                
+                
+                <div class="transptant-overlay" ng-if="!showCategory">No trip Found</div><!--
+-->                <div class="transptant-overlay" ng-if="showCategory">Select at least 1 Category</div>
+                
+            </div>
+            <!-- modal footer -->
+            <div class="modal-footer mdBdr-none">
+              <div class="row">
+                <div class="col-md-3">
+                  <p ng-show="showCategory"><strong>{{exportCategoryPreview.length}}</strong> Categories Found</p>
+                  <p ng-show="!showCategory"><strong>{{exportLogBookDataPreview.length}}</strong> Trips Found</p>
+                </div>
+                <div class="col-md-9">                    
+                  <button type="button" class="btn btn-default"  ng-click="cancel()">Cancel</button>
+                  <button type="button" class="btn btn-danger" ng-show="showCategory" ng-disabled="exportCategoryPreview.length == 0" ng-click="export()">Export as CSV</button>
+                  <button type="button" class="btn btn-danger" ng-show="!showCategory"  ng-click="export()">Export as CSV</button>
+                </div>
+              </div>
+            </div>
+          
+        

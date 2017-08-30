@@ -1,0 +1,202 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-3 col-sm-1 col-xs-3">
+            <a><button type="button" title="Back To Folder" class="btn btn-gray" ng-click="back()">Back</button></a>
+        </div>
+        <div class="col-md-6 col-sm-8 col-xs-7 text-center">
+            <h5>{{currentfolderdata.folder_name}}</h5>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-2 text-right buttonbox-right home">
+            <button ng-if="isVisible" ng-click="openModalfolder(0, '', currentfolderdata.folder_name, 'subcreate','')" data-target=".createFolder"  title="Create SubFolder" class="btn btn btn-danger small-btn" type="button">
+                <span class="btn-text">Create SubFolder</span>
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="subfolderlist">
+        <ul class="listing folder dyrct_popup_listing" id="dyrct_popup_listing">
+            <li class="clearfix text-center padd0 listingli-noBG" ng-if="subfolder.status!='inactive'" ng-repeat="subfolder in subfolderlist| filter:search.searchName | orderBy:'folder_name'">
+                <div class="common-redbox">
+                <div class="row">
+                   
+                    <div class="col-md-12 content-text"> 
+                         <a ui-sref="common.subfolder({id:subfolder.folder_id})">
+                        <span class="pull-left col-md-8">
+                        <div class="folder01 text-left" ng-init="subfolder.searchName = subfolder.folder_name">{{subfolder.folder_name}}</div>                        
+
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID > 0 && subfolder.No_of_subfolder > 0">'{{subfolder.No_of_POI_CID}} Entries' '{{subfolder.No_of_subfolder}} Subfolders'</span>
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID == 0 && subfolder.No_of_subfolder == 0">'No Entries' 'No Subfolders'</span>
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID == 0 && subfolder.No_of_subfolder > 0">'No Entries' '{{subfolder.No_of_subfolder}} Subfolders'</span>
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID > 0 && subfolder.No_of_subfolder == 0">'{{subfolder.No_of_POI_CID}} Entries' 'No Subfolders'</span>
+
+
+                        </span>
+                              <span class="pull-left col-md-8">
+                      <div class="subFolder text-left"><span class="state-text">{{subfolder.hash_tag}}</span></div>
+                  </span>
+              <span class="subFolder pull-right createdBy new">Created By: {{subfolder.created_owner}}</span>
+                        </a>
+                        
+                    </div>
+                        
+                    <div class="btn-hover">
+                        <a ng-if="subfolder.isVisible" ng-click="openModaladdcidfolder(subfolder.folder_id, subfolder.folder_name, currentfolderdata.folder_name, subfolder.folder_name)"><button type="button" title="Add CID/POI" class="btn btn-gray"><i class="glyphicon glyphicon-plus"></i></button></a>
+                        <a ng-click="openModalsharefolder(subfolder.folder_id, currentfolderdata._id, 'subfolder')"><button type="button" title="Share Sub folder" class="btn btn-gray share-icon"><img src="assets/img/icon01.png" alt=""></button></a>
+                        
+                        <a ng-if="subfolder.isVisible" ng-click="openModalfolder(subfolder.folder_id, subfolder.folder_name, currentfolderdata.folder_name, subfolder.folder_name,subfolder.hash_tag,subfolder.lock_folder)"><button type="button" title="Edit Sub folder" class="btn btn-gray edit edit2"></button></a>
+                        
+                        <a ng-click="deletefolder(subfolder.folder_id,subfolder.folder_name)"><button type="button" title="Delete Sub folder" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                        <a ng-if="subfolder.isVisible" ng-click="openModalmove(currentfolderdata._id,subfolder.folder_id,subfolder.folder_name,'false','subfolder')">
+                        <button ng-if="!subfolder.lock_folder" type="button"  title="Move Sub folder" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                        
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </li>
+            <li class="clearfix padd0 listingli-noBG" ng-repeat="folderpoicontactslist in folderpoicontactslist | filter:search.searchName | orderBy:'title'">
+                 <div class="common-redbox clearfix ">
+                     <div class="row">
+                   
+                    <div class="col-md-12 content-text"> 
+                        <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{folderpoicontactslist.pic}}" height="45" width="45" alt=""></div>
+                        <div class="pull-left usernames paddTop0 folder-cidpoi-listing">
+                     {{folderpoicontactslist.title}}
+                    <span>{{folderpoicontactslist.address}}</span>
+                </div>
+                    </div>
+                         <div class="btn-hover">
+                    <!--                    <a  ng-click="openModalshow('folder',folderpoicontactslist.share_type,folderpoicontactslist.share_type_id)"><button type="button" class="btn btn-gray" data-dismiss="modal" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>-->
+                    <!--                    <button class="btn btn-default" tooltip="{{templateUrl}}" tooltip-trigger="click" ng-click="showtooltip()">click</button>-->
+                    <a  ng-click="openModalshow('folder', folderpoicontactslist,$index)">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn dyrct_popup_btnd_{{$index}}" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                    </a>
+                    <!--<button popover-placement="left" uib-popover-template="templateUrl"  type="button" class="btn btn-gray" data-dismiss="modal" ng-click="openModalshow('folder', folderpoicontactslist.share_type, folderpoicontactslist.share_type_id)">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+                    <a ng-click="deletefolderpoicontacts(folderpoicontactslist.id, folderpoicontactslist.folder_id)" analytics-on="click" analytics-event="Delete CID/POI" analytics-category="Delete CID/POI" analytics-label="Delete Folder CID/POI"><button type="button"  title="Delete" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                    <a ng-if="isVisible" ng-click="openModalmovepoi(folderpoicontactslist.id,folderpoicontactslist.folder_id,folderpoicontactslist,'false',folderpoicontactslist.share_type)">
+                        <button type="button"  title="Move" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                    </a>
+                    <a ng-if="isVisible" ng-click="openModalsharecidpoi(folderpoicontactslist.share_type, folderpoicontactslist.share_type_id, folderpoicontactslist.id)" analytics-on="click" analytics-event="Share CID/POI" analytics-category="Share CID/POI" analytics-label="Sahre Folder CID/POI">
+                        <button type="button" title="Share Contact" class="btn btn-gray share-icon" data-target=".share" data-toggle="modal"><img src="assets/img/icon01.png" height="19" width="14" alt=""></button>
+                    </a>
+                    <a ng-if="isVisible" ng-click="openModalsavepoi(folderpoicontactslist.share_type,folderpoicontactslist.share_type_id,folderpoicontactslist.public_note,folderpoicontactslist.url,folderpoicontactslist.phone)" analytics-on="click" analytics-event="Save CID/POI" analytics-category="Save CID/POI" analytics-label="Save Folder CID/POI">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn" >Save PEOPLE/PLACES</button>
+                    </a>
+                         </div>
+                     </div>
+                     
+                
+                
+               </div>
+            </li>
+<li class="homeerror" ng-if="!resultflag">No records found.</li>
+        </ul>
+
+        <!-- persnal detail -->
+    </div>
+</div>
+<div class="dyrct_popup" id="dyrct_popup" ng-show="showpopover">
+    <div class="popup_bg" ng-click="closepopup(currentfolderdata._id, usercontactshowdata.share_type_id)"></div>
+    <div class="custom_popup">
+        <a class="close_popup" ng-click="closepopup(currentfolderdata._id, usercontactshowdata.share_type_id)">X</a>
+        <div class="arrow_black"></div>
+        <div class="content_left">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="imgBlock">
+                        <!--<img class="fullimage" src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.profile_pic}}" alt="">-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="">
+                        <div class="title-name">{{usercontactshowdata.title}}</div>
+                        <div class="divider"></div>
+                        <div class="title-email">{{usercontactshowdata.email}}</div>
+                        <div class="title-address">{{usercontactshowdata.address}}</div>
+<!--                        <div class="title-phone">Phone - {{usercontactshowdata.phone}}</div>
+                        <div class="title-phone" ng-if="usercontactshowdata.alt_phone != ''"> Alternate Number -   {{usercontactshowdata.alt_phone}}</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_right">
+          <!--   <div class="col-sm-12 notes text-left">Add Notes 
+                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(usercontactshowdata.contact_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>
+                    </div> -->
+<!--                    <div class="col-sm-12 notes-text">
+                        <div ng-show="notedata" class="textareabox" ng-focus="focus()" ng-blur="blur()">
+                            {{usercontactshowdata.note}}
+                        </div>
+                        <div ng-hide="notedata" class="textareabox" ng-focus="focus()" ng-blur="blur()">
+                            No notes available.
+                        </div>
+                        <textarea cols="50" rows="5" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+                    </div>-->
+            <div class="col-sm-12 notes-text">
+
+             
+
+                        
+                            <h6>Add Private Note</h6>
+                         <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control height100folder"></textarea>
+                             <h6>Add Public Note</h6>
+                        <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.public_note" ng-focus="focus()" ng-blur="blur()" class="form-control height100folder"></textarea>
+                   
+                    <h6>Add Phone</h6>
+    <input type="text"  showonly-digits ng-change="changeusertype()" ng-model="usercontactshowdata.phone" ng-focus="focus()" ng-blur="blur()" class="form-control height100foldertext">                   
+<!--                        <input type="text" showonly-digits  ng-change="changeusertype()" ng-model="usercontactshowdata.phone" ng-focus="focus()" ng-blur="blur()" class="form-control remove-border-show poi-notes-phone-url"  placeholder="Add Phone"/>-->
+                       <h6>Add Url</h6>
+    <input type="text"  ng-change="changeusertype()" ng-model="usercontactshowdata.url" ng-focus="focus()" ng-blur="blur()" class="form-control height100foldertext">                   
+<!--                        <p ng-show="!urlactive" ng-bind-html="usercontactshowdata.url | linky:'_blank'" class="poi-notes-phone-url poi-linky"></p>-->
+ </div>
+                </div>
+            </div>
+        </div>
+<!--<script type="text/ng-template" id="myPopoverTemplate.html">
+
+
+     modal content 
+    <div class="padd0 notes-popup">
+    <div class="clearfix wrapper-inner">
+    <div class="col-sm-6 col-xs-12 titleBlock leftbox" >
+    <div class="col-sm-12">
+    <div class="form-group">
+    <div class="imgBlock"><img src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.profile_pic}}" alt="" height="60px" width="60px"></div>
+    </div>
+    </div>
+    <div class="col-sm-12">
+    <div class="form-group">
+    <div class="">
+    <div class="title-name">{{usercontactshowdata.firstName}} {{usercontactshowdata.lastname}}</div>
+    <div class="divider"></div>
+    <div class="title-address">{{usercontactshowdata.address}}</div>
+    <div class="title-phone">Phone - {{usercontactshowdata.phone}}</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-6 col-xs-12 titleBlock rightbox1" >
+
+    <div class="col-sm-12 notes-title text-left">Notes</div>
+    <div class="col-sm-12 notes-text">
+    <textarea readonly class="textareabox" cols="50" rows="5" maxlength="50" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+    </div>
+    <div ng-if="usercontact.note">{{usercontactshowdata.note}}</div>
+
+    </div>
+    </div>
+    </div>
+</script>-->
+<!--<div class="popover fade right in" role="tooltip" id="popover311423" style="top: 26px; left: 232.109px; display: block;"><div class="arrow" style="top: 50%;"></div><h3 class="popover-title">Popover title</h3><div class="popover-content">And here's some amazing content. It's very engaging. Right?</div></div>-->
+
+<!-- /container -->
+<!-- Create Folder modal -->

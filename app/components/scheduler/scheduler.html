@@ -1,0 +1,64 @@
+<div class="tab-block"> 
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-1 hidden-xs">
+            <a href="javascript:void(0)" class="home-icon scheduler-icon">Scheduler</a>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12 text-center tabs-middle">
+
+            <!--Start Calender view-->
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-class="{active:mode==='month'}"
+                    ng-click="changeMode('month')">
+                    Month
+                </button>
+                <button type="button" class="btn btn-default" ng-class="{active:mode==='week'}"
+                ng-click="changeMode('week')">
+                Week
+            </button>
+            <button type="button" class="btn btn-default" ng-class="{active:mode==='day'}"
+            ng-click="changeMode('day')">
+            Day
+        </button>
+    </div>    
+</div>
+<!--End Calender view-->
+</div>
+
+<div class="ccol-md-2 col-sm-2 col-xs-2 text-right buttonbox-right home">
+    <button  class="btn btn btn-danger small-btn" type="button" title="Add New Scheduler" ng-click="openModalschedular()">
+        <span class="btn-text">Add New</span>
+        <i class="glyphicon glyphicon-plus"></i>
+    </button>
+</div>
+</div>
+</div>
+<div class="clearifx"></div>
+<div class="col-md-12">
+
+    <!-- Tab panes -->
+
+    <div class="tab-content">
+      <div class="well well-sm calendar">
+            <calendar ng-model="currentDate" calendar-mode="mode" event-source="eventSource"
+            range-changed="reloadSource(startTime, endTime)"
+            event-selected="onEventSelected(event)"
+            time-selected="onTimeSelected(selectedTime)"></calendar>
+        </div>
+
+        <ul class="listing">
+            <li class="clearfix" ng-repeat="scheduler in schedulerlist">
+                <div class="scheduler-time pull-left"><span >{{scheduler.from_date*1000 | date:'dd'}}</span><div><span ng-bind="scheduler.from_time*1000 | date:'hh:mm a'"></span></div></div>
+                <div class="pull-left usernames">{{scheduler.scheduler_title}}<span>{{scheduler.address}}</span></div>
+                <div class="btn-hover">
+                    <a href="javascript:void(0)" ng-click="openModaleditschedular(scheduler,scheduler._id)"><button type="button" title="Edit Scheduler" class="btn btn-gray edit edit2"></button></a>
+                    <a href="javascript:void(0)" ng-click="deleteschedular(scheduler._id)"><button type="button" title="Delete Scheduler" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                </div>
+            </li>
+            <li class="homeerror" ng-if="schedulerlist.length == 0">No Events Found.</li>
+        </ul>
+        <!--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>-->
+    </div>
+
+    <!-- persnal detail -->
+</div>

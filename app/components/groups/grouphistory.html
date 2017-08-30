@@ -1,0 +1,53 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="q.group_data.title" class="ng-hide">
+<div class="tab-block">
+  <div class="row">
+    <div class="col-md-3 col-sm-1 col-xs-1">
+      <button type="button" title="Back" class="btn btn-gray" ng-click="back()">Back</button>
+    </div>
+    <div class="col-md-6 col-sm-8 col-xs-8 text-center">
+      <h5>{{onegrouplist.group_name}}</h5>
+    </div>
+
+  </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+  <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="grouphistorylist">
+    <ul class="listing groupHistory">
+<!--                  <li class="clearfix" ng-repeat="grouphistory in grouphistory">
+                  <div class="row">
+                      <div class="pull-left usernames">{{grouphistory.group_name}} </div>
+                    <div class="col-md-6 usernames paddTop0 padd-left-right">{{grouphistory.group_name}}<span>{{grouphistory.totalMember}} Member</span></div>
+                    <div class="col-md-6 text-right">
+                      <span class="group-history text-left">{{grouphistory.modified_date*1000 | date:'dd-MM-yyyy'}}</span>
+                    </div>
+
+                  </div>
+                </li>-->
+
+                <li class="clearfix padd0" ng-repeat="grouphistory in grouphistorylist | filter:q | orderBy:'-created_date'">
+                    <div class="common-redbox padd20 clearfix" ng-click="openModaladdappointment(grouphistory)" ng-if="grouphistory.sender_id != grouphistory.userId">
+                    <!--<div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{grouphistory.group_data.profile_pic}}" height="45" width="45" alt=""></div>-->
+                    <div class="pull-left usernames">{{grouphistory.group_data.title}}<span>{{grouphistory.group_data.address}}</span><span><i class="fa fa-commenting-o "></i> <b>{{grouphistory.sender_name}}</b>: {{grouphistory.message_title}}</span></div>
+                    <div class="pull-right">
+                      <p>{{grouphistory.created_date*1000 | date:'dd-MMM-yyyy '}} <span>{{grouphistory.created_date*1000 | date:'h:mm a' }}</span></p>
+                      <label >Status: <span ng-if="grouphistory.status == 'Accepted'" style="font-weight: bold;">Accepted</span><span ng-if="grouphistory.status == 'Rejected'" style="font-weight: bold;">Rejected</span><span ng-if="grouphistory.status == 'Pending'" style="font-weight: bold;">Pending</span></label>
+                      <!--<button type="button" title="Status" class="btn btn-gray" data-target=".createGroup" ng-if="grouphistory.sender_id != grouphistory.userId" ui-sref="common.groupstatus({groupid:grouphistory.group_id,messageid:grouphistory.message_id})" >Status</button>-->
+                    </div>
+                  </div>
+                  <div class="common-redbox padd20 clearfix" ng-if="grouphistory.sender_id == grouphistory.userId" >
+                    <!--<div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{grouphistory.group_data.profile_pic}}" height="45" width="45" alt=""></div>-->
+                    <div class="pull-left usernames" ng-click="openModaladdappointment(grouphistory)" >{{grouphistory.group_data.title}}<span>{{grouphistory.group_data.address}}</span><span><i class="fa fa-commenting-o "></i> <b>{{grouphistory.sender_name}}</b>: {{grouphistory.message_title}}</span></div>
+                    <div class="pull-right">
+                      <p>{{grouphistory.created_date*1000 | date:'dd-MMM-yyyy '}} <span>{{grouphistory.created_date*1000 | date:'h:mm a' }}</span></p>
+                      <!--<label ng-if="grouphistory.sender_id == grouphistory.userId">Status: <span ng-if="grouphistory.status == 'accept'" style="color:green;">{{grouphistory.status}}</span><span ng-if="grouphistory.status == 'reject'" style="color:red;">{{grouphistory.status}}</span></label>-->
+                      <button type="button" title="Status" class="btn btn-gray pull-right" data-target=".createGroup" ui-sref="common.groupstatus({groupid:grouphistory.group_id,messageid:grouphistory.message_id})" >Info</button>
+                    </div>
+                  </div>
+                </li>
+                <li class="homeerror" ng-if="grouphistorylist.length==0">No records found.</li>
+              </ul>
+
+              <!-- persnal detail -->
+            </div>
+          </div>

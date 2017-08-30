@@ -1,0 +1,51 @@
+          
+<!-- modal header -->
+<div class="modal-header">
+    <!--<button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+    <h3 class="modal-title" id="myModalLabel">Share</h3>
+
+
+</div>
+<!-- modal content -->
+<div class="modal-body" id="boxscroll3">
+    <div class="spinner-wrapper"  ng-show="loader"> 
+        <div id="spinner1">
+            <div class="loader" >
+                <img ng-src="assets/img/loader_outer.png">
+            </div>
+            <div class="center-loader">
+                <img ng-src="assets/img/loader-center.png" >
+            </div>
+        </div>
+    </div>
+    <form action="" class="">
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" ng-show="contact.isUsingDYRCT == 'true'" ng-if="contact.userId != MyCID._id.$id && contact.profile_visibilty_flag == 'true'" ng-repeat="contact in contactdata | orderBy:'firstName'">
+                    <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                    <div class="pull-left usernames">{{contact.firstName}} {{contact.lastName}}</div>
+                    <div class="pull-right">
+                        <input id="box{{$index + 'contact1'}}" class="checkBox" type="checkbox" name="contactsendgroup" value="{{contact.contact_id}}" ng-checked="contact.checked" ng-model="contact.checked" ng-click="checkedcontactItems(contact.contact_id, 'folder')">
+                        <label for="box{{$index + 'contact1'}}"></label>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </form>
+    <div class="transptant-overlay" >Select at least one Contact</div>
+</div>
+
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6 buttonbox">
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-click="sharefolder()" analytics-on="click" analytics-event="Share Folder" analytics-category="Share Folder" analytics-label="Share Folder">Share</button>
+        </div>
+    </div>
+</div>
+
+

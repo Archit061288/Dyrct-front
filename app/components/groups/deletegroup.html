@@ -1,0 +1,31 @@
+          
+<!-- modal header -->
+<div class="modal-header custome-style">
+    <!--<button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+    <div class="row">
+        <div class="col-md-12 text-center">
+        <span class="delete delete-popup" ng-if="!okbutton"><i class="fa fa-trash fa-2x"></i> </span>
+    </div>
+
+   
+</div>
+<!-- modal content -->
+<div class="modal-body custome-style">
+    
+        <div class="formField">
+            <p ng-bind-html="name"></p>
+        </div>
+    
+</div>
+
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none custome-style">
+    <div class="row">
+       
+            <button type="button" class="btn btn-default" ng-if="!okbutton" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-if="!okbutton" ng-click="deleted()">Delete</button>
+            <button type="button" class="btn btn-danger" ng-if="okbutton" ng-click="deleted()">Ok</button>
+    </div>
+</div>
+
+

@@ -1,0 +1,166 @@
+<div ng-show="check == 'contact'">
+    <div class="popover-modal">
+        <div class="padd0 notes-popup">
+            <div class="clearfix wrapper-inner">
+                <div class="col-sm-6 col-xs-12 titleBlock leftbox" >
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="imgBlock">
+                                <img src="assets/img/user_profile.png" ng-src="{{usercontact.profile_pic}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="">
+                                <div class="title-name">{{usercontact.firstName}} {{usercontact.lastName}}</div>
+                                <div class="divider"></div>
+                                <div class="title-email">{{usercontact.email}}</div>
+                                <div class="title-address">{{usercontact.address}}</div>
+                                <div class="title-phone">Phone - {{usercontact.phone}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12 titleBlock rightbox1" >
+
+                    <div class="col-sm-12 notes-title text-left">Add Notes
+                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(usercontact.contact_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 notes-text">
+                        <textarea cols="50" rows="5" ng-model="usercontact.note" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Show Pop up -->
+<!-- POI Show Popup -->
+<div ng-show="check == 'poi'">
+    <div class="popover-modal">
+        <div class="padd0 notes-popup">
+            <div class="clearfix wrapper-inner">
+                <div class="col-sm-6 col-xs-12 titleBlock leftbox" >
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="imgBlock">
+                                <img src="assets/img/user_profile.png" ng-src="{{userpoi.profile_pic}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="">
+                                <div class="title-name">{{userpoi.title}}</div>
+                                <div class="divider"></div>
+                                <!--<div class="title-email">{{userpoi.email}}</div>-->
+                                <div class="title-address">{{userpoi.address}}</div>
+                                <!--<div class="title-phone">Phone - {{userpoi.phone}}</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12 titleBlock rightbox1" >
+
+                    <div class="col-sm-12 notes-title text-left">Notes 
+                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(userpoi.poi_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 notes-text">
+                        <textarea cols="50" rows="5" ng-model="userpoi.note" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div ng-show="check == 'poi'">
+    <div class="modal-header notes-popup-header" >
+        <button aria-hidden="true" ng-click="cancel()" class="close" type="button">×</button>
+    </div>
+     modal content 
+    <div class="modal-body padd0 notes-popup">
+        <div class="clearfix wrapper-inner">
+            <div class="col-sm-6 col-xs-12 titleBlock leftbox" >
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="imgBlock"><img src="assets/img/user_profile.png" ng-src="{{userpoi.profile_pic}}" alt=""></div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="">
+                            <div class="title-name">{{userpoi.title}}</div>
+                            <div class="divider"></div>
+                            <div>{{usercontact.email}}</div>
+                            <div class="title-address">{{userpoi.address}}</div>
+                            <div class="title-phone">Phone - {{usercontact.phone}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 titleBlock rightbox1">
+
+                <div class="col-sm-12 notes-title text-left">Notes</div>
+                <div class="col-sm-12 notes-text">
+                    <textarea cols="50" rows="5" ng-model="userpoi.note" class="form-control"></textarea>
+                </div>
+                <div ng-if="usercontact.note">{{usercontact.note}}</div>
+                <div class="modal-footer mdBdr-none">
+                    <div class="row">
+                        <hr>
+                        <div class="col-md-12 text-center" ng-show="userpoi.note != ''">
+                            <a ng-click="addnote(userpoi.poi_id, check)" ><button class="btn btn-success">Save</button></a>
+                        </div>
+                        <div class="col-md-12 text-center" ng-show="userpoi.note == ''">
+                            <a ng-click="cancel()">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div ng-show="check == 'trip'">         
+    <!-- modal header -->
+    <div class="modal-header">
+        <div class="titleBlock m-top20">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="pull-c">
+                            <div>{{trip.title}}</div>
+                            <div>{{trip.address}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <!-- modal content -->
+    <div class="modal-body" >
+        <div>Notes</div>
+        <div>{{trip.note}}</div>
+    </div>
+    <!-- modal footer -->
+    <div class="modal-footer mdBdr-none">
+        <div class="row">
+            <hr>
+            <div class="col-md-12 text-center">
+                <a ng-click="cancel()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,198 @@
+ <div class="tab-block-login">
+     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Welcome to DYRCT <a href="#" class="pull-right"><img src="assets/img/remove.png" ng-click="cancel()" alt=""></a> </h3>
+    </div>
+     
+     <ul class="nav nav-tabs">
+    <li ng-class="{active: showlogin}" heading="LOG IN" ng-click="signupregister()" class="ng-isolate-scope">
+  <a href=""   class="ng-binding">LOG IN</a>
+</li>
+<li ng-class="{active: !showlogin}" heading="Sign Up" ng-click="loginregister('su')" class="ng-isolate-scope active">
+  <a href="" class="ng-binding">Sign Up</a>
+</li></ul>
+     
+     <div class="tab-content">
+    <!-- ngRepeat: tab in tabs --><div class="tab-pane ng-scope active" >
+<!--    <uib-tabset>-->
+<!--    <uib-tab heading="LOG IN" ng-click="signupregister()" ng-show="!footerbtn" >-->
+    <div ng-show="showlogin" ng-click="dismissModel('outside')">
+<uib-alert ng-if="errormessage" type="danger" close="closeAlert()">{{errormessage}}</uib-alert>
+        <form novalidate name="login" ng-submit="userlogin()">
+            <div class="modal-body">
+
+               <div class="form-group">
+                <div class="row">
+
+
+                   <div class="col-md-3"><label for="">Mobile Number*</label></div>
+                   <div class="col-md-9"> <input required id="login_username" name="username" class="form-control" ng-class="{'error':(login.username.$dirty && login.username.$invalid)}" ng-model="username" type="text" placeholder="Mobile Number" required></div>
+               </div>
+           </div>
+           <div class="form-group">
+               <div class="row">
+
+                 <div class="col-md-3"> <label for="">Password*</label></div>
+                 <div class="col-md-9">
+                     <input required id="login_password" class="form-control" name= "password" ng-class="{'error':(login.password.$dirty && login.password.$invalid)}" ng-model="password" type="password" placeholder="Web Password" required>
+                 </div>
+             </div>
+         </div>
+         <div class="row text-right">
+            <button id="login_lost_btn" type="button" class="btn btn-link" ng-click="loginregister('fp')">Forgot Web Password?</button>
+        </div>
+
+
+
+
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-10">
+            <p class="md-footerText">
+                If you are already registered with <strong>DYRCT</strong> please first set your Web Password on your <br>
+                mobile device before proceeding.</n>This can be found under Settings in the <strong>DYRCT</strong> App.
+
+            </p>
+        </div> 
+        <div>
+            <button type="submit" ng-disabled="!login.$valid" class="btn btn-danger"  analytics-on="click" analytics-event="Login" analytics-category="Login" analytics-label="Login">Submit</button>
+        </div>
+    </div>
+
+</form>
+</div>
+    </div>
+     </div>
+<!--</uib-tab>-->
+<!--<uib-tab heading="Sign Up" ng-click="loginregister('su')">-->
+
+<div ng-show="!showlogin" ng-click="dismissModel('outside')">
+ <uib-alert ng-if="errorrmessage" type="danger" close="closeAlert()">{{errorrmessage}}</uib-alert>
+ <form novalidate name="signup" action="" class="">
+    <div class="modal-body">
+        <div ng-show="showdiv">
+        <div class="row formField">
+
+
+            <div class="col-md-3">
+                <div class="form-group clearfix">
+                    <label for="exampleInputName2">Country Code *</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div  class="form-group clearfix">
+                    <input required ng-class="{'error': (signup.countrycode.$dirty && signup.countrycode.$invalid) }" numbers-only name="countrycode" ng-change="selectcountryViaCode(countrycode)" type="text" ng-model="countrycode" class="form-control"  placeholder="Code...">
+                </div></div>
+                <div class="col-md-7">
+                    <div class="form-group clearfix">
+
+                        <select class="ac-select stateList" ac-model="selectedState" ac-options="s.name for s in getAllStates()" 
+                        ac-settings="{ comboMode: true, loadOnOpen: true, minWidth: '300px' }" ac-change="stateSelected(value)"></select>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="row formField">
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+
+                        <label for="exampleInputName2">Mobile Number *</label>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input required type="text" ng-model="phonenumber" name="phonenum" ng-class="{'error': (signup.phonenum.$invalid && errorphone) }" class="form-control" id="exampleInputName2" placeholder="Enter your mobile number..">
+                        <span ng-show="signup.phonenum.$dirty && signup.phonenum.$invalid" class="text text-danger">Mobile Number Required.</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary generate-code"  ng-click="generatecode()">GENERATE CODE</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+            <div class="row formField" ng-show="!showdiv">
+                <div class="col-md-6">
+                    <label for="exampleInputName2">Verification Code (One Time PIN) *</label>
+
+                    <div class="form-group">
+                        <input type="text" ng-model="otpcode" ng-class="{'error':error}" class="form-control" id="exampleInputName2" placeholder="Enter one time PIN." required>
+                    </div>
+                    <div class="form-group">
+                        <a href="javascript:void(0)" ng-click="hidediv()" class="backToedit">Change mobile number!</a>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                       <label for="exampleInputName2">Create New Password *</label>
+
+                       <input type="password" id="userpass" data-ng-minlength="6" name="userpass" ng-model="userpass"  class="form-control"  placeholder="Enter password." required>
+                       <span ng-show="signup.userpass.$error.minlength" class="text login-error-title">Password Should Be At Least 6 Characters.</span>
+
+                   </div>
+
+
+
+
+
+
+
+                   <div class="form-group">
+                    <input type="password"  id="password_c" name="password_c" password-confirm match-target="userpass" ng-model="password_c" ng-class="{'error':signup.password_c.$error.noMatch}" class="form-control"  placeholder="Confirm password." required>
+                    <span ng-show="signup.password_c.$error.match" class="text login-error-title">Password Do Not Match.</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-8">
+                <p class="md-footerText"  ng-show="showdiv">
+                   After <strong>Generating Code</strong> you will recieve a verification code
+                   to above registered mobile number. 
+               </p>
+           </div>
+           <div class="col-md-4">
+            <a ui-sref="main.root">
+                <button type="submit" ng-disabled="!login.$valid" ng-show="showdiv" class="btn btn-danger" disabled="disabled">Submit</button></a>
+                <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal" ng-show="!showdiv">Cancel</button>
+                <button type="button" class="btn btn-danger" ng-click="usersignup()" ng-disabled="signup.$invalid" ng-show="!showdiv">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--</uib-tab>
+</uib-tabset>-->
+</div>
+    </div>
+</div>
+
+
+
+<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+  </div>
+</script>
+
+
+
+

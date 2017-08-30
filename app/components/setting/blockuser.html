@@ -1,0 +1,41 @@
+          
+            <!-- modal header -->
+            <div class="modal-header">
+              <!--<button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+              <h3 class="modal-title" id="myModalLabel">Block User</h3>
+            </div>
+            <!-- modal content -->
+            <div class="modal-body" id="boxscroll3" ng-show="contactdata.length > 0">
+              <form action="" class="">
+                <div class="row formField">
+                  <ul class="listing listing2">
+                      <li class="clearfix" ng-repeat="contact in contactdata">
+                      <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                      <div class="pull-left usernames">{{contact.name}}</div>
+                      <div class="pull-right">
+                        <input id="box{{$index + 'contact'}}" class="checkBox" type="checkbox" value="{{contact.userId}}" ng-checked="contact.checked" ng-model="contact.checked" ng-click="checkedcontactItems(contact.userId,'unblock')">
+                        <label for="box{{$index + 'contact'}}"></label>
+                      </div>
+                    </li>
+
+                  </ul>
+                </div>
+              </form>
+            </div >
+            <div  class="modal-body" ng-show="contactdata.length == 0">
+                <p class="center-block">No block users found.</p>
+            </div>
+            
+            <!-- modal footer -->
+            <div class="modal-footer mdBdr-none">
+              <div class="row">
+                  
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-default" ng-hide="contactdata.length == 0"ng-click="cancel()">Cancel</button>
+                  <button type="button" class="btn btn-default" ng-show="contactdata.length == 0"  ng-click="cancel()">OK</button>
+                  <button type="button" class="btn btn-danger" ng-hide="contactdata.length == 0" ng-click="unblockuser()">Unblock</button>
+                </div>
+              </div>
+            </div>
+          
+        

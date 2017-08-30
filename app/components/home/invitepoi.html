@@ -1,0 +1,74 @@
+<style>
+    .angular-google-map-container { height: 900px;}
+    #map_canvas{height:100%;margin:0;}
+.centerMarker{
+  position:absolute;
+  /*url of the marker*/
+  background:url(assets/img/map-point.png) no-repeat center center; display: block; z-index: 9999;  /*center the marker*/  top:50%;left:50%;  height:98px;  width:30px;  cursor:pointer;
+}
+</style>
+<form class="map-modal">
+    <div class="tab-block">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <button type="button" class="btn btn-gray"  ng-click="cancel()">Cancel</button>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                <button data-dismiss="modal" class="btn btn btn-danger small-btn" type="button" ng-click="InvitePoi()">Invite Places</button>
+            </div>
+        </div>
+    </div>
+    <!--<div class="clearifx"></div>-->
+    <div class="right-col">
+        <div class="wideColume col-md-12 padd0" id="mapBlock" >
+            <!-- Tab panes -->
+            <a href="javascript:void(0)" class="centerMarker"></a>
+            <div class="map-block" ng-if="mapshow">
+               
+                <!--            <script type="text/ng-template" id="searchbox.tpl.html">
+                                
+                                <div class="addressSearch">
+                                <input type="text" name="" id="" class="searchFields searchFields2" placeholder="Search starting point">
+                                
+                              </div>
+                                
+                            </script>            -->
+                
+                <ui-gmap-google-map
+                    center="map.center"
+                    zoom="map.zoom"
+                    dragging="map.dragging"
+                    bounds="map.bounds"
+                    events="map.events"
+                    refresh="map.refresh"
+                    options="map.options"
+                    pan="true"
+                    control="map.control"
+                    >
+                    <!--to add as a map control -->
+                    <!--        <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                                                events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>-->
+
+                    <!--to add to a parent div-->
+                    <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
+
+
+<!--                    <ui-gmap-markers models="markers" events="markerOptions.events" options="markerOptions" coords="'self'"  icon="'icon'"  >
+
+                    </ui-gmap-markers>-->
+
+
+                </ui-gmap-google-map>
+            </div>
+            <div class="addressSearch">
+
+                <!--<google-places ng-model="address" name="address" location=location class="form-control" placeholder="Enter Address"></google-places>-->
+                <google-places type="text" ng-model="address" ng-class="{'error':(errorr)}" class="searchFields searchFields2" placeholder="Search Destination" location="location"></google-places>
+                <input type="text" ng-model="title" maxlength="80" ng-class="{'error':(error)}" class="searchFields" placeholder="Add Title">
+            </div>
+
+            <!-- persnal detail -->
+        </div>
+    </div>
+</form>

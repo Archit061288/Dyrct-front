@@ -1,0 +1,192 @@
+
+<!-- modal header -->
+<div class="modal-header folder-move-header">
+    <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title" ng-if="showsubfolder == 'folder'" id="myModalLabel">Move Folder</h3>
+    <h3 class="modal-title" ng-if="showsubfolder == 'subfolder'" id="myModalLabel">Move Sub folder</h3>
+    <h3 class="modal-title" ng-if="showsubfolder == 'CID'" id="myModalLabel">Move Contact</h3>
+    <h3 class="modal-title" ng-if="showsubfolder == 'POI'" id="myModalLabel">Move Address</h3>
+    <div class="row">
+        <div class="col-md-12" ng-show="foldertype != 'subcreate'">
+            <div class="form-group">
+                <!--<input required type="text" placeholder="Folder name..." name="foldername" ng-model="foldername" class="form-control" readonly>-->
+                <!--<div class="city-name" ><div class="city-content"><i class="folder01"></i> Ahmedabad</div></div>-->
+                <div class="city-name" >
+                    <div class="city-content add"><i class="location"></i>{{foldername.title}}
+                        <span class="address">
+                            {{foldername.address | limitTo:20}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- modal content -->
+<div class="modal-body folder-move-body" id="" >
+    <div ng-show="clickfolder">
+    <div class="titleBlock">
+        <div class="folder-sym ">
+            <img ng-src="assets/img/folder-icon.png">
+            <!--<img ng-src="assets/img/folder-icon-arrow.png" />-->
+        </div>
+        <div class="search-content">
+            <div class="row">
+                <div class="col-md-6 label-text">Select <a  href="javascript:void(0)" style="color: #585757;"><span ng-class="{'contactactive':showdata}">Folder</span></a></div>
+                <div class="col-md-6 text-right">
+                    <input type="text" ng-model="search" placeholder="Search here..">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spinner-wrapper"  ng-show="loader">
+        <div id="spinner1">
+            <div class="loader" >
+                <img ng-sfolder-moverc="assets/img/loader_outer.png">
+            </div>
+            <div class="center-loader">
+                <img ng-src="assets/img/loader-center.png" >
+            </div>
+        </div>
+    </div>
+    <form action="" class="">
+        <div class="formField">
+            <ul class="listing listing2 listing-folder">
+<!--                <li ng-init="folder.parentid = $index" class="clearfix" ng-if="(showpoifolder=='true')?(folder.status=='active'):(folder.status == 'active' && folder.folder_id != movefolderid && folder.folder_id != currentfolderdata)" ng-repeat="folder in folderdata| filter:search  | orderBy:'folder_name'">-->
+                    <li ng-init="folder.parentid = $index" class="clearfix" ng-if="(folder.status == 'active' && folder.folder_id != movefolderid && folder.folder_id != currentfolderdata && folder.isVisible == true)" ng-repeat="folder in folderdata| filter:search  | orderBy:'folder_name'">
+                    <div ng-click="folderclick(folder.folder_id,folder.folder_name)">
+                    <div class="pull-left usernames" ng-init="folder.searchName = folder.folder_name"><i class="folder01"></i> {{folder.folder_name}}</div>
+                    <div class="pull-right" ng-if="folder.folder_id != currentfolderbyparam">
+                        <!--<input id="box{{folder.parentid + 'folder'}}" type="radio" name="namefolder" value="{{folder.folder_id}}" ng-checked="folder.checked" ng-model="folderchecked" ng-click="checkedItems(folder.folder_id)">
+                        <label for="box{{folder.parentid + 'folder'}}"></label>-->
+                        <span class="right-arrow" ></span>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                <li class="homeerror" ng-if="folderdata.length == 0">No records found.</li>
+            </ul>
+        </div>
+    </form>
+    <div class="transparent-move-overlay" >Select at least one folder</div>
+    </div>
+    <div ng-show="!clicksubfolder">
+        <div class="titleBlock">
+    <div class="folder-sym ">
+      <img ng-src="assets/img/folder-icon.png">
+      <!--<img ng-src="assets/img/folder-icon-arrow.png" />-->
+    </div>
+    <div class="search-content">
+      <div class="row">
+          <div class="col-md-6 label-text"><a href="javascript:void(0)" class="back" ng-click="backfolder(newsubfolderdata)">Back</a>{{mainfoldername}}</div>
+        <div class="col-md-6 text-right">
+          <input type="text" ng-model="search" placeholder="Search here..">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spinner-wrapper"  ng-show="loader">
+    <div id="spinner1">
+      <div class="loader" >
+        <img ng-sfolder-moverc="assets/img/loader_outer.png">
+      </div>
+      <div class="center-loader">
+        <img ng-src="assets/img/loader-center.png" >
+      </div>
+    </div>
+  </div>
+  <form action="" class="">
+    <div class="formField">
+      <ul class="listing listing2 listing-folder">
+        <li class="moveFolder" ng-if="newsubfolderdata.status=='active'" ng-repeat="newsubfolderdata in newsubfolderlist | filter:search  | orderBy:'folder_name'">
+            <div ng-click="subfolderclick(newsubfolderdata.folder_id,newsubfolderdata.folder_name)">
+          <div class="pull-left usernames" ng-init="newsubfolderdata.searchName = newsubfolderdata.folder_name"><i class="folder01"></i> {{newsubfolderdata.folder_name}}</div>
+          <div class="pull-right" >
+<!--            <input id="box{{newsubfolderdata.parentid +'folder'}}" type="radio" name="namefolder" value="{{newsubfolderdata.folder_id}}" ng-checked="newsubfolderdata.checked" ng-model="folderchecked" ng-click="checkedItems(newsubfolderdata.folder_id)">
+            <label for="box{{newsubfolderdata.parentid +'folder'}}"></label>-->
+            <span class="right-arrow"></span>
+          </div>
+          <div class="clearfix"></div>
+            </div>
+          </li>
+          <li>
+              <div class="moveFolder" ng-repeat="subfolderdatacidpoi in newfolder_poi_contactslist | filter:search">
+           <dl>
+            <dt class="clearfix">
+              <div class="imgBlock pull-left"><img  src="assets/img/user_icon.png" ng-src="{{subfolderdatacidpoi.pic}}" style="width:45px;height:45px"></div><div class="pull-left usernames" style="font-family: 'montserratregular';font-size: 15px;color: #585757;font-weight: 400;">{{subfolderdatacidpoi.title}}</div>
+
+            </dt>
+           </dl>
+                                    </div>
+          </li>
+                                  <li class="homeerror" ng-if="folderdata.length==0">No records found.</li>
+                                </ul>
+    </div>
+                            </form>
+                            <div class="transparent-move-overlay" >Select at least one folder</div>
+    </div>
+<!--    <div ng-show="!clicksubfolder2">
+        <div class="titleBlock">
+    <div class="folder-sym ">
+      <img ng-src="assets/img/folder-icon.png">
+      <img ng-src="assets/img/folder-icon-arrow.png" />
+    </div>
+    <div class="search-content">
+      <div class="row">
+          <div class="col-md-6 label-text"><a href="javascript:void(0)" class="back" ng-click="backsubfolder(newsubfolderlist)">Back</a>{{mainsubfoldername}}</div>
+        <div class="col-md-6 text-right">
+          <input type="text" ng-model="search" placeholder="Search here..">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spinner-wrapper"  ng-show="loader">
+    <div id="spinner1">
+      <div class="loader" >
+        <img ng-sfolder-moverc="assets/img/loader_outer.png">
+      </div>
+      <div class="center-loader">
+        <img ng-src="assets/img/loader-center.png" >
+      </div>
+    </div>
+  </div>
+  <form action="" class="">
+    <div class="formField">
+      <ul class="listing listing2 listing-folder">
+        <li class="location" ng-repeat="subfolderdatacidpoi in newfolder_poi_contactslist | filter:search">
+          <div class="pull-left usernames" ><i class="location"></i> {{subfolderdatacidpoi.title}}</div>
+          <div class="pull-right" >
+            <input id="box{{newsubfolderdata.parentid +'folder'}}" type="radio" name="namefolder" value="{{newsubfolderdata.folder_id}}" ng-checked="newsubfolderdata.checked" ng-model="folderchecked" ng-click="checkedItems(newsubfolderdata.folder_id)">
+            <label for="box{{newsubfolderdata.parentid +'folder'}}"></label>
+            <span class="right-arrow"></span>
+          </div>
+          <div class="clearfix"></div>
+          </li>
+          <li>
+              <div class="moveFolder" ng-repeat="subfolderdatacidpoi in newfolder_poi_contactslist">
+           <dl>
+            <dt class="clearfix">
+              <i class="location"></i>{{subfolderdatacidpoi.title}}
+
+            </dt>
+           </dl>
+                                    </div>
+          </li>
+                                  <li class="homeerror" ng-if="folderdata.length==0">No records found.</li>
+                                </ul>
+    </div>
+                            </form>
+                            <div class="transparent-move-overlay" >Select at least one folder</div>
+    </div>-->
+    <!-- modal footer -->
+    <div class="modal-footer mdBdr-none">
+        <div class="row">
+            <div class="col-md-12 buttonbox">
+                <button type="button" class="btn btn-default pull-right" ng-click="cancel()">Cancel</button>
+                <button type="button" class="btn btn-danger pull-left" ng-click="movefolder()"  analytics-on="click" analytics-event="Move CID/POI" analytics-category="Move CID/POI" analytics-label="Move Folder CID/POI">Move Here</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

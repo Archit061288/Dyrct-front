@@ -1,0 +1,61 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="q" ng-change="userSearch(q)">
+<div class="search-btn-folderview" ng-if="isFolder">
+ <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+          <span ng-if="searchtype==''">Private folder</span>
+          <span ng-if="searchtype=='tag'|| searchtype=='tag,owner'||searchtype=='owner,tag'">Public folder</span>
+          <span ng-if="searchtype=='folder'||searchtype=='folder,tag'||searchtype=='tag,folder'">Public folder</span>
+          <span ng-if="searchtype=='owner'|| searchtype=='owner,folder'||searchtype=='folder,owner'">Public folder</span>
+          <span ng-if="searchtype=='tag,owner,folder'">Public folder</span>
+          <span class="caret"></span>
+      </button>
+     
+<!--      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem" ng-click="userSearchType('')"><a href="#">Search All</a></li>  
+        <li role="menuitem" ng-click="userSearchType('tag')"><a href="#">Tag</a></li>
+        <li role="menuitem" ng-click="userSearchType('folder')"><a href="#">Folder</a></li>
+        <li role="menuitem" ng-click="userSearchType('owner')"><a href="#">Owner Name</a></li>
+      </ul>-->
+
+      <ul class="folderdropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem" ng-click="userSearchType('private')"><a href="javascript:void(0);" >Private folder</a></li>
+        <li role="menuitem"><a>Public folder</a>
+        <ul class="searchfilter">
+            <li role="menuitem" ng-click="userSearchType('public')"><input type="checkbox" ng-model="checkboxModel.tag">Tag</li>
+        <li role="menuitem" ng-click="userSearchType('public')"><input type="checkbox"  ng-model="checkboxModel.folder">Folder Name</li>
+        <li role="menuitem" ng-click="userSearchType('public')"><input type="checkbox"  ng-model="checkboxModel.owner">Owner Name</li> 
+         </ul>
+        </li>
+      
+      </ul>
+
+    </div>
+</div>
+<div class="search-btn-folderview" ng-if="ispoi">
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>
+          <span ng-if="!searchpoi">Private</span>
+          <span ng-if="searchpoi">Public</span>
+          <span class="caret"></span>
+      </button>
+
+      <ul class="poidropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        
+         <li role="menuitem" ng-click="userSearchpoiType('private')"><a href="javascript:void(0);" >Private</a></li>
+        <li role="menuitem" ng-click="userSearchpoiType('public')"><a href="javascript:void(0);" >Public</a>
+        <ul class="searchfilter">
+        
+         </ul>
+        </li>
+      
+      </ul>
+
+    </div>
+</div>
+<!--
+<select class="selectBoxForSearch" ng-show="isFolder" ng-model="searchtype" ng-change="userSearchType(searchtype)">
+	<option value="">Search All</option>
+	<option value="tag">Tag</option>
+	<option value="folder">Folder</option>
+	<option value="owner">Owner Name</option>
+</select> -->

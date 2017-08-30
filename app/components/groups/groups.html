@@ -1,0 +1,45 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName.group_name" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+        <div class="col-xs-12 visible-xs">
+            <h3 class="text-center">Groups</h3>
+        </div>
+        <div class="col-md-6 col-sm-6 hidden-xs">
+            <a class="groupsIcon">Groups</a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 text-right buttonbox-right home">
+            <button type="button"  title="Create New Group" class="btn btn btn-danger small-btn" data-target=".createGroup" ng-click="openModalgroup()" >
+                <span class="btn-text">Create New</span>
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="grouplist">
+        <ul class="listing folder group">
+            <li class="clearfix text-center padd0" ng-repeat="grouplist in grouplist | filter:search.searchName | orderBy:'-modified_date'">
+             <div class="common-redbox">
+                <div class="row" >
+                    <div class="col-md-12" ng-click="anchor(grouplist.group_id)"> <div class="groups-icon01 text-left">{{grouplist.group_name}} <span class="subFolder pull-right createdBy" ng-if="grouplist.created_by_name == 'self'"><b>You are Admin</b></span><span class="subFolder pull-right createdBy" ng-if="grouplist.created_by_name != 'self'">Created By : {{grouplist.created_by_name}}</span></div></div>
+                    <!--<div class="col-md-6" ng-click="anchor(grouplist.group_id)"></div>-->
+                    <div class="btn-hover" >
+                        <a ui-sref="common.groupuserlist({id:grouplist.group_id})" ><button type="button"  title="Send Group" class="btn btn-gray">{{grouplist.totalMember}} <span ng-show="grouplist.totalMember == 1">Member </span><span ng-show="grouplist.totalMember != 1">Members </span></button></a>
+                        <a ng-click="openModalsendgroup(grouplist.group_id)"><button type="button"  title="Send Group" class="btn btn-gray" data-target=".send" >Send</button></a>
+                        <a ng-click="openmodelupdategroup(grouplist.group_id,grouplist.group_name,'edit')" ng-if="MyCID._id.$id == grouplist.created_by"><button type="button"  title="Edit Group" class="btn btn-gray edit edit2"></button></a>
+                        <a ng-click="deletegroup(grouplist.group_id,grouplist.group_name)" ng-if="MyCID._id.$id == grouplist.created_by"><button type="button"  title="Delete Group" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="homeerror" ng-if="!resultflag || grouplist.length==0">No records found.</li>
+    </ul>
+
+    <!-- persnal detail -->
+</div>
+</div>
+
+<!-- /container -->
+<!-- create group modal -->

@@ -1,0 +1,154 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-3 col-sm-1 col-xs-3">
+            <button type="button" class="btn btn-gray" ng-click="back()">Back</button>
+        </div>
+        <div class="col-md-6 col-sm-8 col-xs-6 text-center">
+            <h5><h5>{{currentfolderdata.folder_name}}</h5></h5>
+        </div>
+        <div class="col-md-3 col-sm-2 col-sm-2 col-xs-2 text-right">
+
+            <!--<button data-toggle="modal" data-target=".createFolder" class="btn btn btn-danger small-btn" type="button">Create New</button>-->
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="folder_poi_contacts">
+        <ul class="listing dyrct_popup_listing" id="dyrct_popup_listing">
+            <li class="clearfix padd0 listingli-noBG" ng-repeat="folder_poi_contacts in folder_poi_contacts | filter:search | orderBy:'title'">
+                 <div class="common-redbox clearfix ">
+                     <div class="row">
+                   
+                    <div class="col-md-12 content-text">
+                        <div class="pull-left usernames paddTop0" ng-init="folder_poi_contacts.searchName = folder_poi_contacts.title + ' ' + folder_poi_contacts.address"><i class="location"></i>{{folder_poi_contacts.title}}<span>{{folder_poi_contacts.address}}</span></div>
+                    </div>
+                         <div class="btn-hover">
+                    <a ng-click="openModalshow('folder', folder_poi_contacts.share_type, folder_poi_contacts.share_type_id,$index,folder_poi_contacts)">
+                        <button type="button" class="btn btn-gray dyrct_popup_btn dyrct_popup_btnd_{{$index}}" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                    </a>
+                    <!--<button popover-placement="left" uib-popover-template="templateUrl" popover-trigger="focus" type="button" class="btn btn-gray" data-dismiss="modal" ng-click="openModalshow('folder', folder_poi_contacts.share_type, folder_poi_contacts.share_type_id)">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+                    <a ng-click="deletefolderpoicontacts(folder_poi_contacts.id, folder_poi_contacts.folder_id)"  analytics-on="click" analytics-event="Delete CID/POI" analytics-category="Delete CID/POI" analytics-label="Delete Sub Folder CID/POI"><button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                 <a ng-click="openModalmovepoi(folder_poi_contacts.id,folder_poi_contacts.folder_id,folder_poi_contacts,'false',folder_poi_contacts.share_type)">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                    </a>
+                    <a ng-click="openModalsharecidpoi(folder_poi_contacts.share_type, folder_poi_contacts.share_type_id, folder_poi_contacts.id)"  analytics-on="click" analytics-event="Share CID/POI" analytics-category="Share CID/POI" analytics-label="Share Sub Folder CID/POI">
+                        <button type="button" title="Share CID" class="btn btn-gray share-icon" data-target=".share" data-toggle="modal"><img src="assets/img/icon01.png" height="19" width="14" alt=""></button>
+                    </a>
+                    
+                    <a ng-click="openModalsavepoi(folder_poi_contacts.share_type,folder_poi_contacts.share_type_id)" analytics-on="click" analytics-event="Save CID/POI" analytics-category="Save CID/POI" analytics-label="Save Sub Folder CID/POI">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn" >Save PEOPLE/PLACES</button>
+                    </a>
+                         </div>
+                         </div>
+                 </div>
+                
+                
+                
+            </li>
+            <li class="homeerror" ng-if="!resultflag ">No records found.</li>
+            <!--                      <li class="clearfix">
+                                    <div class="pull-left usernames">Adward fisher <span>Address, CA, +1 900944</span></div>
+                                    <div class="btn-hover">
+                                      <button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button>
+                                    </div>
+                                  </li>
+                                  <li class="clearfix">
+                                    <div class="pull-left usernames">Alex Silva <span>Address, CA, +1 900944</span></div>
+                                    <div class="btn-hover">
+                                      <button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button>
+                                    </div>
+                                  </li>
+                                  <li class="clearfix">
+                                    <div class="pull-left usernames">Alice chavez <span>Address, CA, +1 900944</span></div>
+                                    <div class="btn-hover">btn-hover
+                                      <button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button>
+                                    </div>
+                                </li>-->
+
+                            </ul>
+
+                            <!-- persnal detail -->
+                        </div>
+                    </div>
+                    <div class="dyrct_popup" id="dyrct_popup" ng-show="showpopover">
+                        <div class="popup_bg" ng-click="closepopup(currentfolderdata._id, usercontactshowdata.share_type_id)"></div>
+                        <div class="custom_popup">
+                            <a class="close_popup" ng-click="closepopup(currentfolderdata._id, usercontactshowdata.share_type_id)">X</a>
+                            <div class="arrow_black"></div>
+                            <div class="content_left">
+                             <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="imgBlock">
+                                        <!--<img class="fullimage" src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.profile_pic}}" alt="">-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="">
+                                        <div class="title-name">{{usercontactshowdata.title}}</div>
+                                        <div class="divider"></div>
+                                        <div class="title-email">{{usercontactshowdata.email}}</div>
+                                        <div class="title-address">{{usercontactshowdata.address}}</div>
+<!--                                        <div class="title-phone">Phone - {{usercontactshowdata.phone}}</div>
+                                        <div class="title-alterphone" ng-if="usercontactshowdata.alt_phone != ''">    {{usercontactshowdata.alt_phone}}</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content_right">
+                            <div class="col-sm-12 notes text-left">Add Notes 
+<!--                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(usercontactshowdata.contact_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>-->
+                    </div>
+                    <div class="col-sm-12 notes-text">
+<!--                        <div ng-show="notedata" class="textareabox" ng-focus="focus()" ng-blur="blur()" disabled>
+                            {{usercontactshowdata.note}}
+                        </div>
+                        <div ng-hide="notedata" class="textareabox" ng-focus="focus()" ng-blur="blur()" disabled>
+                            No notes available.
+                        </div>-->
+            <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--<script type="text/ng-template" id="myPopoverTemplate.html">
+
+
+     modal content 
+    <div class="padd0 notes-popup">
+    <div class="clearfix wrapper-inner">
+    <div class="col-sm-6 col-xs-12 titleBlock leftbox" >
+    <div class="col-sm-12">
+    <div class="form-group">
+    <div class="imgBlock"><img src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.profile_pic}}" alt="" height="60px" width="60px"></div>
+    </div>
+    </div>
+    <div class="col-sm-12">
+    <div class="form-group">
+    <div class="">
+    <div class="title-name">{{usercontactshowdata.firstName}} {{usercontactshowdata.lastname}}</div>
+    <div class="divider"></div>
+    <div class="title-address">{{usercontactshowdata.address}}</div>
+    <div class="title-phone">Phone - {{usercontactshowdata.phone}}</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-6 col-xs-12 titleBlock rightbox1" >
+
+    <div class="col-sm-12 notes-title text-left">Notes</div>
+    <div class="col-sm-12 notes-text">
+    <textarea readonly class="textareabox" cols="50" rows="5" maxlength="50" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+    </div>
+    <div ng-if="usercontact.note">{{usercontactshowdata.note}}</div>
+
+    </div>
+    </div>
+    </div>
+</script>-->

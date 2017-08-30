@@ -1,0 +1,41 @@
+<div class="tab-block">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <!-- <a href="javascript:void(0)" class="">Notification List</a> -->
+            Notification List
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="col-md-12">
+    <!-- Tab panes -->
+    <div class="tab-content notification-page">
+        <ul class="">
+            <li ng-repeat="notification in notificationlist">
+                <div class="notification-inner red rounded">
+                    <span class="datetime ">{{notification.timestamp * 1000| date:'dd-MMMM-yyyy'}} - {{notification.timestamp * 1000| date:'HH:mm'}}</span>
+                    <p class="msg-text">{{notification.message}} <span>{{notification.sender_name}}</span></p>
+                    <div class="option-btns">
+                        <span class="pull-left"><a class="note-btn-block" ng-click="blocknotification(notification, $event)"></a></span>
+                        <span class="divider-bar"></span>
+                        <span class="pull-right">
+                            <span class="divider-bar"></span>
+                            <a href="" class="note-btn-deny" ng-click="updatenotification(notification.notification_id, $event)"></a>
+                            <span class="divider-bar"></span>
+                            <a href="" class="note-btn-accept" ng-if="notification.method_type != 'share_group'" ng-click="acceptnotification(notification, $event)"></a>
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <li class="notification-none text-center" ng-show="notificationlist.length == 0">
+                No Notification Found !!
+            </li>
+            <div class="Notification-setting">
+                <div class="pull-left"><i class="fa fa-bell-o"></i> Notification History </div><a href="javascript:void(0)" ui-sref="common.notificationhistory"><i class="fa fa-tasks pull-right m-top5"></i></a>
+            </div>
+        </ul>
+    </div>
+
+    <!-- persnal detail -->
+</div>
+

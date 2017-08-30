@@ -1,0 +1,490 @@
+<div class="tab-block">
+    <div class="row">
+        <div class="col-xs-4">
+            <a ui-sref="common.home"><button data-dismiss="modal" title="Back"  class="btn btn-gray" type="button">Back</button></a>
+        </div>
+        <div class="col-xs-4 text-center">
+            <h5>MY PROFILE</h5>
+        </div>
+        <div class="col-xs-4 text-right">
+            <button data-dismiss="modal" class="btn btn-gray edit" title="Edit CID"  ng-click="editcid()" type="button"></button>
+        </div>
+    </div>
+</div>
+<div class="right-col mycid clearfix">
+    <div class="wideColume" id="boxscroll2" getheight="editadd">
+        <div class="row">
+            <div class="col-sm-2 selectpic2 userProfilePic">
+                <label for="" class="labelTitle font-size14">CID INFO.</label>
+                <div class="form-group">
+                    <!--                    ng-src="{{mycid.profile_pic}}"-->
+                   
+                    <div>
+                        <img class="userprofileCid" src="assets/img/profilePic5.png" ng-src="{{editadd.profile_pic}}" alt="" width="150px" height="150px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 cid-contentbox">
+                <hr>
+                <div class="row m-top40">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Category</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.category}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">First name</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.firstName}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Last name</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.lastname}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Company name</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.companyName}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Designation</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.designation}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Email</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.email}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Mobile Number</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.phone}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Alternate Number</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.alt_phone}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">URL</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields poi-linky" ng-bind-html="editadd.url | linky:'_blank'"></div> 
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Address</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.address}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">City</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.city}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">State</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.state}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Country</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.country}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-4 col-xs-5">
+                            <div class="title">Zip code</div>
+                        </div>
+                        <div class="col-sm-6 col-xs-7">
+                            <div class="fields">{{editadd.zipcode}}</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+<!--            <div class="col-sm-2">
+                <div class="form-group">
+                        <a href="{{editadd.qrcode_image}}" download="{{editadd.firstName}}.png"><img src="" ng-src="{{editadd.qrcode_image}}"/></a>
+                        <span>This is your cid in QR code format</span>
+                </div>
+            </div>-->
+        </div>
+        <div class="clearfix"></div>
+<!--        <div class="row">
+                                                    <div class="col-sm-2 selectpic2" ng-click="tooglehideselect()">
+                                                        <label for="" class="labelTitle font-size14">Business Address</label>
+                                                    </div>
+                                                    <div class="col-sm-10 cid-contentbox padd0">
+                                                        <hr>
+                                                    </div>
+                                                    <a ng-click="openview('public')" href="javascript:void(0)" class="plus-icon pull-right" title="View Address"  ng-hide="hideprivate">View</a>    
+                                                    <a  class="addplus-icon pull-right" href="javascript:void(0)" ng-hide="!hideprivate" data-target=".addNew" title="Add New Address"  data-toggle="modal" ng-click="openModalshare('public')"><u>Add New</u></a>
+                                                    <div class="clearfix"></div>
+                                                     clearfix 
+                                                    <div class="clearfix" ng-hide="!hideprivate" ng-repeat="privateadd in privateadd">
+                                                        <div class="col-sm-2 selectpic2 addTitle">Address {{$index + 1}}</div>
+                                                        <div class="col-sm-10 cid-contentbox" >
+
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">Company Name</div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-xs-7">
+                                                                        <div class="fields">{{privateadd.company_name}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">Address</div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-xs-7">
+                                                                        <div class="fields">{{privateadd.address}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">Mobile Number</div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-xs-5">
+                                                                        <div class="fields">{{privateadd.phone}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">Email</div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-xs-7">
+                                                                        <div class="fields">{{privateadd.email}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">Country</div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-xs-7">
+                                                                        <div class="fields">{{privateadd.country}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">State</div>
+                                                                    </div>
+                                                                    <div class="col-sm-6 col-xs-7">
+                                                                        <div class="fields">{{privateadd.state}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+
+                                                                <div class="form-group clearfix">
+                                                                    <div class="col-sm-2 col-xs-5">
+                                                                        <div class="title">City</div>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-xs-7">
+                                                                        <div class="fields">{{privateadd.city}}</div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-sm-7">
+                                                                        <div class="fields">
+                                                                            <ul class="socialIcon">
+                                                                                <li>SHARE WITH</li>
+
+                                                                                <li><a href="javascript:void(0)" socialshare
+                                                                                 socialshare-provider="facebook"
+                                                                                 socialshare-type="sharer"
+                                                                                 socialshare-text=""
+                                                                                 socialshare-url="http://maps.google.com/maps?q={{privateadd.location}}&ll={{privateadd.location}}&z=16"
+                                                                                 socialshare-popup-height="300"
+                                                                                 socialshare-popup-width="400"
+                                                                                 socialshare-trigger="click" >
+                                                                                 <img src="assets/img/fb.png" height="21" width="12" alt="">
+                                                                             </a></li>
+                                                                             <li><a href="javascript:void(0)" socialshare
+                                                                                 socialshare-provider="twitter"
+                                                                                 socialshare-hashtags=""
+                                                                                 socialshare-via=""
+                                                                                 socialshare-text=""
+                                                                                 socialshare-url="http://maps.google.com/maps?q={{privateadd.location}}&ll={{privateadd.location}}&z=16"
+                                                                                 socialshare-popup-height="300"
+                                                                                 socialshare-popup-width="400"
+                                                                                 socialshare-trigger="click" >
+                                                                                 <img src="assets/img/twitter.png" height="18" width="25" alt="">
+                                                                             </a></li>
+
+                                                                                <li><a href="javascript:void(0)" 
+                                                                                       socialshare
+                                                                                       socialshare-media="http://maps.google.com/maps?q={{privateadd.location}}&ll={{privateadd.location}}&z=16"
+                                                                                       socialshare-provider="pinterest"
+                                                                                       socialshare-text=""
+                                                                                       socialshare-url="http://maps.google.com/maps?q={{privateadd.location}}&ll={{privateadd.location}}&z=16"
+                                                                                       socialshare-popup-height="300"
+                                                                                       socialshare-popup-width="400"
+                                                                                       socialshare-trigger="click" >
+                                                                                        <img src="assets/img/pintrest.png" height="21" width="17" alt="">
+                                                                                    </a>
+                                                                                    <a ng-click="checkimage('http://maps.google.com/maps?q=35.128061,-106.535561&ll=35.126517,-106.535131&z=17','')" >Pin</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-5">
+                                                                        <div class="fields cid-editlinks">
+
+                                                                            <a href="javascript:void(0)" ng-click="editopenModalshare('public',privateadd.address_id,privateadd.company_name,privateadd.email,privateadd.phone,privateadd.address,privateadd.country,privateadd.state,privateadd.city,privateadd.location,privateadd.zipcode)" title="Edit Address"  class="editAddress pull-left">Edit</a>
+                                                                            <a href="javascript:void(0)" title="Delete Address" ng-click="delete('public',privateadd.address_id)" class="delete-links pull-right">Delete</a>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>-->
+<!--        <div class="row">
+            <div class="col-sm-2 selectpic2" ng-click="toogleselect()">
+                <label for="" class="labelTitle font-size14">Personal Address </label>
+            </div>
+            <div class="col-sm-10 cid-contentbox padd0">
+                <hr>
+            </div>
+            <a ng-click="openview('private')" href="javascript:void(0)" class="plus-icon pull-right" title="View Address"  ng-hide="hidepersonal">View</a>
+            <a  class="addplus-icon pull-right" href="javascript:void(0)" data-target=".addNew" ng-hide="!hidepersonal" title="Add New Address"  data-toggle="modal" ng-click="openModalshare('private')"><u>Add New</u></a>
+            <div class="clearfix"></div>
+            <div class="clearfix" ng-hide="!hidepersonal" ng-repeat="personaladd in personaladd">
+
+                <div class="col-sm-2 selectpic2 addTitle">Address {{$index + 1}}</div>
+                <div class="col-sm-10 cid-contentbox" >
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="title">Company Name</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-7">
+                                <div class="fields">{{personaladd.company_name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="title">Address</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-7">
+                                <div class="fields">{{personaladd.address}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="title">Mobile Number</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-7">
+                                <div class="fields">{{personaladd.phone}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="title">Email</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-7">
+                                <div class="fields">{{personaladd.email}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="title">Country</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-7">
+                                <div class="fields">{{personaladd.country}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-xs-5">
+                                <div class="title">State</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-7">
+                                <div class="fields">{{personaladd.state}}</div>
+                            </div>
+                        </div>
+                    </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    <div class="title">City</div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="fields">{{personaladd.city}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="form-group clearfix">
+                                                <div class="col-sm-2">
+                                                    <div class="title">City</div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="fields">{{personaladd.city}}</div>
+                                                </div>
+                                                <div class="col-md-4 col-sm-7">
+                                                    <div class="fields">
+                                                        <ul class="socialIcon">
+                                                            <li>SHARE WITH</li>
+
+                                                            <li><a href="javascript:void(0)" socialshare
+                                                             socialshare-provider="facebook"
+                                                             socialshare-type="sharer"
+                                                             socialshare-text=""
+                                                             socialshare-url="http://maps.google.com/maps?q={{personaladd.location}}&ll={{personaladd.location}}&z=16"
+                                                             socialshare-popup-height="300"
+                                                             socialshare-popup-width="400"
+                                                             socialshare-trigger="click" >
+                                                             <img src="assets/img/fb.png" height="21" width="12" alt="">
+                                                         </a></li>
+                                                         <li><a href="javascript:void(0)" socialshare
+                                                             socialshare-provider="twitter"
+                                                             socialshare-hashtags=""
+                                                             socialshare-via=""
+                                                             socialshare-text=""
+                                                             socialshare-url="http://maps.google.com/maps?q={{personaladd.location}}&ll={{personaladd.location}}&z=16"
+                                                             socialshare-popup-height="300"
+                                                             socialshare-popup-width="400"
+                                                             socialshare-trigger="click" >
+                                                             <img src="assets/img/twitter.png" height="18" width="25" alt="">
+                                                         </a></li>
+
+                                                                                <li><a href="javascript:void(0)" 
+                                                                                       socialshare
+                                                                                       socialshare-media="http://maps.google.com/maps?q={{personaladd.location}}&ll={{personaladd.location}}&z=16"
+                                                                                       socialshare-provider="pinterest"
+                                                                                       socialshare-text=""
+                                                                                       socialshare-url="http://maps.google.com/maps?q={{personaladd.location}}&ll={{personaladd.location}}&z=16"
+                                                                                       socialshare-popup-height="300"
+                                                                                       socialshare-popup-width="400"
+                                                                                       socialshare-trigger="click" >
+                                                                                        <img src="assets/img/pintrest.png" height="21" width="17" alt="">
+                                                                                    </a>
+                                                                                    <a ng-click="checkimage('http://maps.google.com/maps?q=35.128061,-106.535561&ll=35.126517,-106.535131&z=17','')" >Pin</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2 col-sm-5">
+                                                                        <div class="fields cid-editlinks">
+                                                                            <a href="javascript:void(0)" ng-click="editopenModalshare('private',personaladd.address_id,personaladd.company_name,personaladd.email,personaladd.phone,personaladd.address,personaladd.country,personaladd.state,personaladd.city,personaladd.location,personaladd.zipcode)" title="Edit Address"  class="editAddress pull-left">Edit</a>
+                                                                            <a href="javascript:void(0)" ng-click="delete('private',personaladd.address_id)" title="Delete Address"  class="delete-links pull-right">Delete</a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <hr>
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>-->
+                                                <!--         persnal detail -->
+                                                
+                                            </div>
+                                        </div>
+
+
+
+
+

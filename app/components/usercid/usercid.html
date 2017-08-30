@@ -1,0 +1,216 @@
+
+<form novalidate name="usercid">
+    <div class="tab-block">
+
+        <div class="row">
+            <div class="col-md-4">
+                <button data-dismiss="modal" class="btn btn-gray" title="Cancel"  type="button">Cancel</button>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>MY PROFILE</h5> 
+            </div>
+            <div class="col-md-4 text-right">
+                <button data-dismiss="modal" class="btn btn-danger small-btn" title="Save MY PROFILE" ng-disabled="usercid.$invalid" ng-click="savecid()" type="button">Save</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="right-col">
+        {{successmessage}}
+        <div class="wideColume" id="boxscroll2" getheight="usercid">
+            <div class="row">
+                <div class="col-md-4 selectpic">
+                    <div class="form-group">
+                        <label for="" class="labelTitle">SELECT Category</label>
+                        
+                        <div class="btn-group bootstrap-select" ng-class="{'open':open}">
+                            <button ng-click="toggleselect()" type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" data-id="selectBox" title="Select country" aria-expanded="false">
+                                <span class="filter-option pull-left">{{selectedcategory.name}}</span>&nbsp;
+                                <span class="caret"></span>
+                            </button>
+                            <div class="dropdown-menu open" style="max-height: 271px; overflow: hidden; min-height: 0px;">
+                                <ul class="dropdown-menu inner" role="menu" style="max-height: 259px; overflow-y: auto; min-height: 0px;">
+
+                                    <li ng-click="selectcategory(item)" ng-repeat="item in items" data-original-index="1">
+                                        <a tabindex="0" class="" style="" data-tokens="null">
+                                            <span class="text">{{item.name}}</span>
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="selectedcategory.name == 'Others'">
+                            <label></label>
+                            <input type="text" class="form-control"  required ng-change="changevalue()" name="othercategory" ng-model="othercategory" ng-class="{'error':(usercid.othercategory.$invalid)}"/>
+                        </div>
+<!--                        <p>
+                            profile pic would be round
+                            and square for personal
+                            and business category
+                            respectively
+                        </p>-->
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4 uploadpicbox">
+                    <div class="form-group">
+                        <label for=""  class="labelTitle">Name <span class="red">*</span></label>
+                        <input required type="text" title="First name" ng-class="{'error':(usercid.firstname.$dirty && usercid.firstname.$invalid)}" ng-model="firstname" placeholder="Enter Name..." name="firstname" class="form-control">
+                    </div>
+                    <div class="uploadPic">
+                        <div class="image-uploader" data-base-height="196" data-base-width="196">
+                            <div class="image">
+                                <input  id="profile_picture" type="file" name="profile_pic" file-model="profile_pic"/>
+
+                                <img ng-src="{{imageurl}}" />
+
+                            </div>
+
+                        </div>
+                        <label for="profile_picture" title="Upload Image"  class="btn btn-default upload-btn">Upload picture</label>
+                    </div>
+                    <p class="PhoneNumber"  >{{phone}}</p>
+<!--p
+                    <div class="uploadPic " ng-if="selectedcategory.name == 'Personal'">
+                        <div class="image-uploader" data-base-height="130" data-base-width="130">
+                            <div class="image">
+                                <input  id="profile_picture" type="file" name="profile_pic" file-model="profile_pic"/>
+                                                                
+                                <img ng-src="{{imageurl}}" src="" />
+
+                            </div>
+
+                        </div>
+                    </div>-->
+
+                    
+
+                </div>
+
+                <!-- rightside -->
+                <div class="col-md-8 discriptionBlock">
+                    <a href="#" ng-click="editmap(location,address,city,state,country,zip,true)"><h3>Select Location <span>(Optional)</span><i></i></h3></a>
+                    <p>
+                        This will allow other users to find you, but if you have privacy concerns you may leave this blank.This section is optional however please be aware that other users will be able to see the information you enter and navigate to the address you supply. You can edit your profile at any time.
+                    </p>
+                </div>
+                
+
+                <div class="col-md-8">
+                    <div class="displayAdd clearfix" ng-show="displayadd">
+                        <div class="row">
+                           <div class="col-md-11">
+                            <div class="form-group">
+                                <label for="" class="labelTitle">Address</label>
+                                <input class="form-control"  ng-show="!mapattr" ng-model="address"/>
+                                <input class="form-control" ng-show="mapattr" ng-model="addresscomponent"/>
+                                <!--<google-places required ng-model="address" name="address" ng-class="{'error':(usercid.address.$dirty && usercid.address.$invalid)}" location=location class="form-control" placeholder="Enter Address"></google-places>-->
+                                <!--<input type="text" required ng-model="address" readonly="true" placeholder="Enter Address" id="" class="form-control" style="background-color: #fff;">-->
+
+                            </div>
+                        </div>
+                        <div class="col-md-1 text-right">
+                            <div class="form-group">
+                                <label for="" class=""></label>
+                                <a href="" data-dismiss="modal" class="m-top20 " ng-click="editmap(location,address,city,state,country,zip,true)" title="Edit Address" type="button" style="    margin-top: 10px; display:block;"><img src="assets/img/pencil.png" alt=""></a>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=""  class="labelTitle">Country</label>
+                                <input  type="text" title="Country" ng-class="{'error':(usercid.firstname.$dirty && usercid.firstname.$invalid)}" ng-model="country" placeholder="Enter Country." name="firstname" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="labelTitle">State</label>
+                                <input  type="text" title="State" name="lastname" ng-class="{'error':(usercid.lastname.$dirty && usercid.lastname.$invalid)}" ng-model="state" placeholder=" Enter State"  class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="labelTitle" >City</label>
+                                <input  type="text" title="City" name="companyname" ng-class="{'error':(usercid.companyname.$dirty && usercid.companyname.$invalid)}" ng-model="city" placeholder="Enter City."  class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" class="labelTitle">Zip Code</label>
+                                <input  type="text" title="Zip Code" name="Zip Code" ng-model="zip" placeholder="Enter Zip Code"  class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="" ng-click="moredetail()">
+                    <h5><a href="javascript:void(0);"><i class="plusIcon">+</i> Add more detail</a></h5>
+                </div>
+                <div class="addMoreData clearfix row" ng-show="openmoredeatil">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="labelTitle">Company Name</label>
+                            <input  type="text"  name="companyname"  ng-model="companyname" placeholder="Enter Company Name"  class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="labelTitle">Designation</label>
+                            <input  type="text" title="Designation" name="designation" ng-class="{'error':(usercid.phone.$dirty && usercid.phone.$invalid)}" ng-model="designation" placeholder="Designation."  class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="labelTitle">Email</label>
+                            <input type="email" ng-pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/" title="Email Address" name="email"  ng-model="email"  placeholder="Enter email address."  class="form-control">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="labelTitle">URL</label>
+                            <input  type="text" title="URL" name="url"  ng-model="url" placeholder="Enter url."  class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+
+    <div class="clearfix"></div>
+<!--            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                    <h4>Company Address <a href="javascript:void(0)" class="check-icon pull-right">Done</a></h4>
+                </div>
+            </div>-->
+
+            <!-- persnal detail -->
+            <!--        <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                            <h4>Personal Address<a href="javascript:void(0)" class="plus-icon pull-right">Add</a> </h4>
+                            <hr>
+                        </div>
+                    </div>-->
+
+
+
+                </div>
+
+            </div>
+        </form>    

@@ -1,0 +1,84 @@
+<div class="tab-block">
+    <div class="row">
+        <div class="col-sm-4 col-xs-3">
+            <a ui-sref="common.logbook" ng-if="tripdetail.category_id == '0'"><button  data-dismiss="modal" class="btn btn-gray" type="button">Back</button></a>
+            <a ui-sref="common.categories" ng-if="tripdetail.category_id != '0'"><button  data-dismiss="modal" class="btn btn-gray" type="button">Back</button></a>
+        </div>
+        <div class="col-sm-4 col-xs-5 text-center">
+            <h5>Trip Details</h5>
+        </div>
+        <div class="col-sm-4 col-xs-4 text-right lb-tripdetail">
+            <button  class="btn btn-gray blue-text" type="button" ng-click="downloadPNG()">
+                EXPORT AS PNG
+                <i class="glyphicon glyphicon-download-alt"></i>
+            </button>
+            <button class="btn btn-gray blue-text" type="button" ng-click="exportcsv(tripdetail.start_date_time,tripdetail.end_date_time)" analytics-on="click" analytics-event="EXPORT CSV" analytics-category="EXPORT CSV" analytics-label="EXPORT CSV">
+                <span class="btn-text" >EXPORT AS CSV</span>
+                <i class="glyphicon glyphicon-download-alt"></i>
+            </button>
+            <a ng-click="deletelogbooktripdetail(tripdetail._id,tripdetail.title)"><button data-dismiss="modal" class="btn btn-gray delete" type="button"><i class="glyphicon glyphicon-trash"></i></button></a>
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+
+<!--Start Trip Details-->
+<div class="trip-detail" id="show_button">
+    <div class="section-heading">
+        <h3>
+            {{tripdetail.title}} <br> Estimated: {{tripdetail.expected_duration}} ({{expdistancekilo}})
+            <span>{{tripdetail.start_date_time * 1000 | date:'MMMM d, y'}}</span>
+        </h3>
+    </div>
+    <div class="row" >
+        <div class="col-lg-8 col-md-7 col-sm-12">
+            <div class="map" id="map_zoom">
+                <ng-map zoom="14" center="37.7699298,-122.4469157" height="403" width="640" alt="Map">
+
+                <directions 
+                draggable="false"
+                panel="directions-panel"
+                waypoints="{{wayPoints}}"
+                origin="{{origin}}"
+                destination="{{destination}}">
+            </directions>
+        </ng-map>
+    </div>                  
+</div>
+<div class="col-lg-4 col-md-5 col-sm-12">
+    <div class="address">
+        <div class="timing clearifx">
+            <div class="time am">
+                <i class="icon icon-map-green"></i>
+                <div class="time-detail">
+                    <h4>{{tripdetail.start_date_time * 1000 | date:'h:mm a'}}</h4>
+                    <p>{{tripdetail.start_address}}</p>
+                </div>
+            </div>
+            <div class="time pm">
+                <i class="icon icon-map-orange"></i>
+                <div class="time-detail">
+                    <h4>{{tripdetail.end_date_time * 1000 | date:'h:mm a'}}</h4>
+                    <p>{{tripdetail.end_address}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="distance">
+            <div class="row">
+                <div class="col-lg-6 col-xs-6">
+                    <span>Kilometer</span>
+                    <strong>{{distancekilo}}</strong>
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                    <span>Trip Duration</span>
+                    <strong>{{tripdiff(tripdetail.start_date_time,tripdetail.end_date_time)}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+<div id="img-out"></div>
+<!--End Trip Details-->

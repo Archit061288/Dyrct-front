@@ -1,0 +1,83 @@
+<style>
+    .angular-google-map-container { height: 900px; 
+    }
+     #map_canvas{height:100%;margin:0;}
+.centerMarker{
+  position:absolute;
+  /*url of the marker*/
+  background:url(assets/img/map-point.png) no-repeat center center; display: block; z-index: 9999;  /*center the marker*/  top:50%;left:50%;  height:125px;  width:65px;  cursor:pointer;
+}
+</style>
+<form >
+    <div class="tab-block">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <button type="button" class="btn btn-gray" data-dismiss="modal" ui-sref="common.poilistview">Cancel</button>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                <button data-dismiss="modal" class="btn btn btn-danger small-btn pull-right" type="button" ng-click="addpoi()" analytics-on="click" analytics-event="CREATE POI" analytics-category="CREATE POI" analytics-label="CREATE POI">Save in PLACES</button>
+                <div class="public pull-right">
+                                    <input id="box1" type="checkbox" class="checkBox" name="invitecont" ng-checked="public.checked" ng-model="public.checked" value="PUBLIC" ng-click="checkpublic(public.checked)">
+                
+                                    <label for="box1"></label>
+                                   <span class="pull-right"> PUBLIC</span>
+                                   </div>
+<!--                                    <a ng-click="sendSms(contact.phone)" target="_top" class="invite pull-left" style="margin-top: 7px;">Invite to DYRCT <i class="glyphicon glyphicon-chevron-right"></i> </a>-->
+                                    <!--                                    <a ng-click="deletecontact(contact.contact_id)"><button type="button" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>-->
+                                
+               
+            </div>
+        </div>
+    </div>
+    <div class="clearifx"></div>
+    <div class="right-col">
+        <div class="wideColume col-md-12 padd0" id="mapBlock" >
+            <!-- Tab panes -->
+            <a href="javascript:void(0)" class="centerMarker"></a>
+            <div class="map-block">
+                <!--            <script type="text/ng-template" id="searchbox.tpl.html">
+                                
+                                <div class="addressSearch">
+                                <input type="text" name="" id="" class="searchFields searchFields2" placeholder="Search starting point">
+                                
+                              </div>
+                                
+                            </script>            -->
+                <ui-gmap-google-map
+                    center="map.center"
+                    zoom="map.zoom"
+                    dragging="map.dragging"
+                    bounds="map.bounds"
+                    events="map.events"
+                    refresh="map.refresh"
+                    options="map.options"
+                    pan="true"
+                    control="map.control"
+                    >
+                    <!--to add as a map control -->
+                    <!--        <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                                                events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>-->
+
+                    <!--to add to a parent div-->
+                    <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
+
+
+<!--                    <ui-gmap-markers models="markers" events="markerOptions.events" options="markerOptions" coords="'self'"  icon="'icon'"  >
+
+                    </ui-gmap-markers>-->
+
+
+                </ui-gmap-google-map>
+            </div>
+            <div class="addressSearch">
+
+                <!--<google-places ng-model="address" name="address" location=location class="form-control" placeholder="Enter Address"></google-places>-->
+                <google-places type="text" ng-model="address" ng-class="{'error':contacterror}" class="searchFields searchFields2" placeholder="Search starting point" location="location"></google-places>
+                <input type="text" ng-model="title" ng-class="{'error':contacterror}" class="searchFields" placeholder="Add Title" maxlength="60">
+            </div>
+
+            <!-- persnal detail -->
+        </div>
+    </div>
+</form>

@@ -1,0 +1,68 @@
+    
+            <!-- modal header -->
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 class="modal-title" id="myModalLabel" ng-show="edit != 'edit'">Create Group</h3>
+              <h3 class="modal-title" id="myModalLabel" ng-show="edit == 'edit'">Edit Group</h3>
+              <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input ng-class="{'error':contacterror}" type="text" maxlength="80" placeholder="Enter group name here..." name="groupname" ng-model="groupname" class="form-control" required>
+                                <span  style="color:red;" ng-show="contacterror" class="text text-danger">{{messageerror}}</span>
+                            </div>
+                        </div>
+                    </div>
+                
+              <div class="titleBlock m-top20">
+                <div class="row">
+                  <div class="col-md-6" >Select Contact</div>
+                  
+                  <div class="col-md-6 text-right">
+                    <a href="javascript:;" id="selectall" ng-click="selectAll()">Select all /</a><a href="javascript:;" id="deselectall" ng-click="deselectAll()">Deselect all</a> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- modal content -->
+            <div class="modal-body" id="boxscroll3">
+                <div class="spinner-wrapper"  ng-show="loader"> 
+<div id="spinner1">
+                <div class="loader" >
+                    <img ng-src="assets/img/loader_outer.png">
+                </div>
+                <div class="center-loader">
+                    <img ng-src="assets/img/loader-center.png" >
+                </div>
+</div>
+</div>
+              <form action="" class="">
+                <div class="row formField">
+                  <ul class="listing listing2">
+                      <li class="clearfix" ng-if="contact.isUsingDYRCT == 'true' && MyCID._id.$id != contact.userId && contact.profile_visibilty_flag == 'true'"  ng-repeat="contact in contactdata | orderBy:'firstName'">
+                          <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""> 
+                                  </div>
+                      <div class="pull-left usernames">{{contact.firstName}} {{contact.lastName}}</div>
+                      <div class="pull-right">
+                        <input id="box{{$index}}" type="checkbox" value="{{contact.userId}}" ng-checked="contact.checked" ng-model="contact.checked" ng-click="checkedItems(contact.userId,contact.checked)">
+                        <label for="box{{$index}}"></label>
+                      </div>
+                          
+                      </li>
+                     <li class="homeerror" ng-if="contactlistdata.length==0">No records found.</li>
+                  </ul>
+                </div>
+              </form>
+                <div class="transptant-overlay" >Select at least one Contact</div>
+            </div>
+            <!-- modal footer -->
+            <div class="modal-footer mdBdr-none">
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                  <button type="button" class="btn btn-danger" ng-show="!group_id" ng-click="creategroup()">Create</button>
+                  <button type="button" class="btn btn-danger" ng-show="group_id" ng-click="updategroup()">Update</button>
+                </div>
+              </div>
+            </div>
+          
+        

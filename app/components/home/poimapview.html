@@ -1,0 +1,62 @@
+<style>
+    .angular-google-map-container { height: 900px; }
+</style>
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-2 col-sm-1 hidden-xs">
+            <a href="javascript:void(0)" class="home-icon">Places</a>
+        </div>
+        <div class="col-md-6 col-sm-7 col-xs-9 text-center tabs-middle listviewtab">
+            <!-- <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" title="PEOPLE"  ui-sref-active="active"><a ui-sref="common.home" >PEOPLE</a></li>
+                <li role="presentation" title="PLACES"  ng-class="{'active':mapviewclass}"><a ui-sref="common.poilistview"  >PLACES</a></li>
+               
+            </ul> -->
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3 text-center selectview">
+            <div class="btn-group bootstrap-select" ng-class="{'open':open}" style="margin-top: -3px;background-color: #fff;" >
+                <button ng-click="toggleselect()" type="button" class="btn dropdown-toggle mapview" data-toggle="dropdown" data-id="selectBox" title="Select country" aria-expanded="false">
+                    <a class="" ui-sref="common.mapview"><span class="filter-option pull-left">Map View</span>
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                    </a>
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu open" style="background-color: #fff;">
+                    <ul class="dropdown-menu inner" role="menu">
+
+
+                        <li data-original-index="1" style="background-color: #fff;">
+                            <a ui-sref="common.poilistview" tabindex="0" ui-sref-active="active" style="text-align: left;" data-tokens="null">
+                                <span class="text" >List View</span>
+                                <span class="glyphicon glyphicon-list"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2 col-sm-2 col-xs-2 text-right buttonbox-right home">
+            <button data-dismiss="modal" ui-sref="common.poi" title="Create POI"  class="btn btn btn-danger small-btn" type="button">
+                <span class="btn-text">Create Address</span>
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 padd0" id="mapBlock" >
+        <!-- Tab panes -->
+        <div class="map-block">
+
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+            <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+            <ui-gmap-windows show="show">
+            <div ng-non-bindable>{{title}} , {{address}}</div>
+        </ui-gmap-windows>
+    </ui-gmap-markers>
+</ui-gmap-google-map>
+</div>
+</div>
+</div>

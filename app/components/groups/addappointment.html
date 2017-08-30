@@ -1,0 +1,59 @@
+<style>
+    .angular-google-map-container { height: 250px; }
+</style>          
+<!-- modal header -->
+<div class="modal-header">
+    <h3 class="modal-title" id="myModalLabel">{{groupid.group_data.title}}</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <p>{{groupid.message_date_time*1000 | date:'dd-MMM-yyyy '}} {{groupid.message_date_time*1000 | date:'h:mm a' }}</p>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group pull-right">
+                <p>Sender Name: {{groupid.sender_name}}</p>
+
+            </div>
+        </div>
+    </div>
+
+    <!--    <div class="titleBlock m-top20">
+            <div class="row">
+
+            </div>
+        </div>-->
+</div>
+<!-- modal content -->
+<div class="modal-body" id="boxscroll3" ng-if="mapview">{{mapview}}
+    <div class="map-block" >
+
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" bounds="map.bounds">
+            <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+                <ui-gmap-windows show="show">
+                    <div ng-non-bindable>{{address}}</div>
+                </ui-gmap-windows>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>
+    
+</div>
+<div class="appoint-popup clearfix">{{groupid.message_title}}</div>
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    
+    <div class="row">
+        
+        <div class="col-md-6">
+            
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-danger" ng-if="groupid.type == 'contact'" ng-click="savecidpoi()">Save PEOPLE</button>
+            <button type="button" class="btn btn-danger" ng-if="groupid.type == 'poi'" ng-click="savecidpoi()">Save PLACES</button>
+        </div>
+    </div>
+</div>
+
+

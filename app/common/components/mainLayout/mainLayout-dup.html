@@ -1,0 +1,369 @@
+<div class="landingpage">
+    <div class="banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="bgimg">
+                    <div class="dyrct-logo col-xs-12">
+                        <img src="assets/img/dyrct-logo-big.png" alt="dyrct">
+                    </div>
+                    <div class="banner-text col-xs-12">Let your destination find you</div>
+                    <div class="banner-buttons col-xs-12">
+                        <ul>
+                            <li><button class="btn btn-gray blue-btn" id="intro_link">Learn More</button></li>
+                            <li><button class="btn btn-gray red-btn" ng-click="signup('signup')">Sign UP</button></li>
+                            <li><button class="btn btn-gray black-btn" ng-click="login('login')">Log in</button></li>
+                        </ul>
+                    </div>
+                    <div class="arrow col-xs-12">
+                        <a href="javascript:void(0)" class="btn" id="intro_link"><img src="assets/img/scroll-arrow.png" alt="scroll"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="introduction" id="intro">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 addIcon">
+
+
+                    <h1>What is DYRCT?</h1>
+                    <p>
+                        DYRCT is a destination and location management platform making address sharing, navigation and trip management simple, fast and accurate.
+                    </p>
+                    <p>
+                        From sharing a single location with an individual or group to sharing multi-location folders to your entire contact list, Dyrct is effective, easy to use and will simplify your life.
+                    </p>
+                    <div ng-show="readmoreflag">
+                        <p>Dyrct is a Mobile and Web supported network of user-managed online Connected Identities (CiD) which are easily created, saved and shared among users. Privacy and viewing restrictions can be altered for your entire contact list or customised for individual contacts.
+                        </p>
+                        <p>This CiD forms the basis of common-destination user groups and multi-CiD themed folders both of which have wide social networking, travel and business applications.
+                        </p>
+                        <p>Our ‘one-touch’ navigation launch interface avoids the complexity & input inaccuracy typical of traditional navigation devices.
+                        </p>
+                        <p>Go Dyrct and let your destination find you.
+                        </p>
+                    </div>
+                    <div class="row text-center">
+                        <a  class="btn btn-gray btn-more" href="javascript:void(0);" ng-hide="!readmoreclose" ng-click="readmore()">Show More</a>
+                    </div>
+
+                    <img src="assets/img/web-icon.png" alt="" class="web-icon">
+
+
+
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="row text-center store-icons"> 
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <span><img src="assets/img/apps-store.png" alt=""></span>
+                            <a href="https://itunes.apple.com/in/genre/ios/id36?mt=8" target="_blank" title="App Store Icon" class="downloadBtn">Download</a>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-left">
+                         <span> <img src="assets/img/play-store.png" alt="flyer"/></span>
+                         <a href="https://play.google.com/store?hl=en" target="_blank" title="Play Store Icon" class="downloadBtn">Download
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+ <section class="features" id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>SOME KEY FEATURES</h2>
+            </div>
+            <div class="howtouse">
+                <div class="container">
+                    <div class="row">
+                           <!--  <div class="col-xs-12">
+                                <h1>How To Use Dyrct?</h1>
+                            </div> -->
+                            <h5>Meeting a friend at a new restaurant, or organizing a social event?</h5>
+                            <p>Our address sharing and group invitation functions are what you need. And don’t just share your holiday photo’s – share your destination folder as well.</p>
+                            <h5>Navigating to a new client or helping them find you?</h5>
+                            <p>In your own city or far away this can be complex and time-consuming. With Dyrct you can send and receive accurate addresses, manage multiple folders and keep an accurate logbook record of every trip.</p>
+                            <h5>Going somewhere?</h5>
+                            <p>Save an existing Point of Interest or create your own. Save and share any location 
+                                from a City Hotel to a farm-gate on a deserted road.</p>
+                                <!-- <div class="col-xs-12 padd0">
+                                    <div class="tabs">
+                                        <input type="radio" name="tabs" id="euser-tab1" checked >
+                                        <input type="radio" name="tabs" id="buser-tab2">
+                                        <input type="radio" name="tabs" id="cuser-tab3">
+                                        <div class="labals">
+                                            <label for="euser-tab1" ng-class="{'active': tabClass1 }" ng-click="tab('tab1')">
+                                                <span>DYRCT for YOU</span>
+                                                <i class="tabicon"></i>
+                                            </label>
+
+                                            <label for="buser-tab2" ng-class="{'active': tabClass2 }" ng-click="tab('tab2')">
+                                                <span>DYRCT for BUSINESS</span>
+                                                <i class="tabicon"></i>
+                                            </label>
+
+                                            <label for="cuser-tab3" ng-class="{'active': tabClass3 }" ng-click="tab('tab3')">
+                                                <span>DYRCT for PLACES</span>
+                                                <i class="tabicon"></i>
+                                            </label>
+                                        </div>
+
+
+
+                                        <div id="tab-content1" class="tab-content">
+                                            <p><strong>Meeting a friend at a new restaurant, or organizing a social event?</strong> Our address sharing and group invitation functions are what you need. And don’t just share your holiday photo’s – share your destination folder as well.
+                                            </p>
+                                            <ul>
+                                                <li>&nbsp;</li>
+                                                <li>&nbsp;</li>
+                                                <li>&nbsp;</li>
+                                            </ul>
+                                        </div>
+                                        <div id="tab-content2" class="tab-content">
+                                            <p><strong>Navigating to a new client or helping them find you?</strong>  In your own city or anywhere internationally - can be complex and time-consuming.With Dyrct you can send and receive accurate addresses, manage multiple address and location and folders and keep an accurate logbook record of every trip.
+                                            </p>
+                                            <ul>
+                                                <li>&nbsp;</li>
+                                                <li>&nbsp;</li>
+                                                <li>&nbsp;</li>
+                                            </ul>
+                                        </div>
+                                        <div id="tab-content3" class="tab-content">
+                                            <p><strong>Going somewhere?</strong> Save an existing Point of Interest or create your own. Save and share any location from a City Hotel to a farm-gate on a deserted road.
+                                            </p>
+                                            <ul>
+                                                <li>&nbsp;</li>
+                                                <li>&nbsp;</li>
+                                                <li>&nbsp;</li>
+                                            </ul>
+                                        </div> 
+                                    </div>
+
+
+
+
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 feature-list1">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="content-box">
+                                <span class="feature-icon cid-icon"></span> 
+                                <p class="feature-title">CID</p>
+                                <span class="feature-text">
+                                    <b>Your Connected Identity (CiD) is the heart of your Dyrct experience.</b><br>
+                                    It includes some basic information and a chosen fixed location for you or your business. The CiD is user-created so it is personalized, editable and accurate.</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="content-box">
+                                    <span class="feature-icon navigate-icon"></span> 
+                                    <p class="feature-title">Navigating</p>
+                                    <span class="feature-text">
+                                        <b>With simple address sharing and one-touch navigation, Dyrct is a powerful navigation tool.</b><br>
+                                        Imagine accurate and simple navigating from your mobile device using your preferred mapping software? This is it.</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="content-box">
+                                        <span class="feature-icon cidshare-icon"></span> 
+                                        <p class="feature-title">Sharing</p>
+                                        <span class="feature-text">
+                                            <b>Are you still manually sending address details, downloading maps and dropping pins?</b><br>
+                                            Don’t be that person.  With Dyrct, simply share your location and Points of Interest with just one swipe.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 feature-list2">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="content-box">
+                                            <span class="feature-icon groups-icon"></span> 
+                                            <p class="feature-title">Groups</p>
+                                            <span class="feature-text">
+                                                <b>You’re planning a lunch or a meeting or just getting together? Or perhaps you need to arrange where to meet the fan-bus at the stadium. </b><br>
+                                                It’s so easy. Decide who you want in the group, add the place you are meeting and send. Now everyone just has to click once on the venue and they are on their way! No giving directions and no-one is going to get lost.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="content-box">
+                                                <span class="feature-icon folder-icon"></span> 
+                                                <p class="feature-title">Folders</p>
+                                                <span class="feature-text">
+                                                    <b>You’ve just taken the trip of a lifetime to an exotic foreign location. You know all the hotspots and experienced great hotels and restaurants.  You know you just have to share these with your friends.</b><br>
+                                                    Simple! Create a folder, pull in the CiD of every place you visited and share the whole trip!. Send it to your friend or perhaps … send it everyone!
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="content-box">
+                                                <span class="feature-icon logbook-icon"></span> 
+                                                <p class="feature-title">Logbook</p>
+                                                <span class="feature-text">
+                                                    <b>Remembering where you went today, or yesterday or last week is just beyond you? Well we’re here to help. Every trip taken is saved and you can manage multiple logbooks.</b><br>
+                                                    Now just send these to that person asking where you were yesterday.
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>    
+
+                        <section class="faqs">
+                            <div class="container">
+                                <div class="row">
+                                    <div ng-hide="hidesearch">
+                                        <div class="col-xs-12">
+                                            <h2>FAQ</h2>
+                                        </div>
+                                    </div>
+                                    <div ng-hide="!hidesearch">
+                                        <div class="col-xs-8">
+                                            <h2 class="landingpage-searchfaq">FAQ</h2>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <input type="text" name="searchfaq" class="form-control" placeholder="Search" ng-model="search"/> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <div class="faq-list ">
+                                                <uib-accordion>
+                                                <uib-accordion-group ng-if="$index < numoffaq" ng-repeat="faq in faqdata |filter:search">
+                                                <uib-accordion-heading>{{faq.title}}</uib-accordion-heading>
+                                                <p>{{faq.content}}</p>
+                                            </uib-accordion-group>
+                                            <div class="homeerror" ng-if="faqdata.length==0">NO</div>
+
+                                        </uib-accordion>
+                                    </div>
+                                </div>
+                                <div class="landingpage-faq">
+                                  <button  class="btn btn-gray btn-more pull-left" ng-click="loadmore()">Load More</button>
+
+
+                                  <input type="text" ng-model="search" class="btn-search" placeholder="Search FAQ here..">
+                                  <button  class="btn btn-gray btn-more pull-right links" id="contactus_link">Need Help?</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+              <section class="usertip">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xs-12">
+                            <h2>User Tips</h2>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="faq-list ">
+                                    <p class="usertip-text"><strong>It’s all about you!</strong></p>
+                                    <p class="usertip-text">And we like it like that – so we have created an App that is fun and easy to use. <br>
+                                        But in case you’re having a bad day here are some tips to help you make your Dyrct experience even better.</p>
+                                        <ul class="usertip-img">
+                                            <li><img src="assets/img/swipe1.jpg" width="300px" height="200px"/></li>
+                                            <li><img src="assets/img/swipe2.jpg" width="300px" height="200px"/></li>
+                                            <li><img src="assets/img/swipe3.jpg" width="300px" height="200px"/></li>
+
+
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="contactus" id="contactus">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Contact Us</h2>
+                            </div>
+                            <div class="col-sm-8 form-block">
+                                <p style="margin-left: 6px;">It’s easy. Just fill in this form and we will get back to you Directly.</p>
+                                <form novalidate id="contactusform" name="contact" ng-submit="contactus()">
+                                    <div class="row form-block-row">
+                                        <div class="col-sm-6 firstname">
+                                            <div class="form-group">
+                                                <input name="firstname" placeholder="First name" class="form-control" ng-class="{'error':(contact.firstname.$dirty && contact.firstname.$invalid)}" ng-model="firstname" type="text" required >
+                                                <label for="firstname">First Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 lastname">
+                                            <div class="form-group">
+                                                <input name="lastname" placeholder="Last name" class="form-control" ng-class="{'error':(contact.lastname.$dirty && contact.lastname.$invalid)}" ng-model="lastname" type="text" required>
+                                                <label for="lastname">Last Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <input name="email" placeholder="Email" class="form-control" ng-pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/" ng-class="{'error':(contact.email.$invalid && contact.email.$dirty)}" ng-model="email" type="text" required>
+                                                <label for="email">Email</label>
+                                                <span  ng-show="emailerror" class="text text-danger">Invalid E-mail Id</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group textareabox">
+                                                <textarea name="comment" class="form-control" placeholder="Your message here" ng-model="comment" maxlength="150" required></textarea>
+                                                <label for="yourwordhere">Your message here</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" ng-disabled="!contact.$valid" class="btn flyericon"></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-4 social-links">
+                                <p></p>
+                                <ul>
+                                    <li><a class="btn sicons facebook-icon" title="Facebook" href="https://www.facebook.com/goDYRCT" target="_blank"></a></li>
+                                    <li><a class="btn sicons twitter-icon" title="Twitter" href="https://twitter.com/dyrct?lang=en" target="_blank"></a></li>
+                                    <!--<li><a class="btn sicons goolgeplus-icon" titel="Google+"  href="http://www.google.com" target="_blank"></a></li>-->
+                                    <li><a class="btn sicons instagram-icon" title="Instagram" href="https://www.instagram.com/?hl=en" target="_blank"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="container-fluid"></div>
+                <footer class="footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-3 callus">
+                                <div class="col-sm-12 padd0">
+                                </div>
+                            </div>
+                            <div class="col-sm-2 callus">
+                                <div class="col-sm-12 padd0">
+                                </div>
+                            </div>
+                            <div class="col-sm-1 callus">
+                                <div class="col-sm-12 padd0">
+                                 <button  class="btn btn-gray btn-more" ng-click="disclaimer()">Disclaimer</button>
+                                 <!-- <p ng-click="disclaimer()" style="cursor: pointer;">Disclaimer</p>-->
+
+                             </div>
+                         </div>
+                         <div class="col-sm-6 copyright clearfix">
+                            <div class="col-sm-12 padd0"><a class="footer-logo"></a></div>
+                            <div class="col-sm-12 padd0"><p>2015@dyrct. All rights reserved.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div> 
+

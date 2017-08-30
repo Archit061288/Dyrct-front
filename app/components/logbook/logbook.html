@@ -1,0 +1,73 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-3 col-sm-2 hidden-xs">
+            <a href="javascript:void(0)" class="logBook-small">Log Book</a>
+        </div>
+        <div class="col-md-6 col-sm-8 col-xs-12 text-center tabs-middle">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a ui-sref="common.logbook" aria-controls="home" role="tab" data-toggle="tab">Recent Trips</a></li>
+                <li role="presentation"><a ui-sref="common.categories" aria-controls="profile" role="tab" data-toggle="tab">Categories</a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-3 col-sm-2 col-sm-2 col-xs-2 text-right buttonbox-right">
+            <button data-dismiss="modal" title="Export Logbook CSV" class="btn btn btn-danger small-btn" type="button" ng-click="openModalExportCsv('home')">
+                <span class="btn-text">Export</span>
+                <i class="glyphicon glyphicon-export"></i>
+            </button>
+            <button data-dismiss="modal" title="Select Logbook" class="btn btn btn-danger small-btn" type="button" ng-hide="showme" ng-disabled="showmee">
+                <span class="btn-text">Select</span>
+                <i class="glyphicon glyphicon-ok"></i>
+            </button>
+            <button class="btn btn btn-danger small-btn" title="Move Logbook" ng-click="openModalshare('logbook')" ng-hide="!showme">
+                <span class="btn-text">Move</span>
+                <i class="glyphicon glyphicon-move"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12" getheight="getlogbook">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+
+                <ul class="listing">
+                    <li class="clearfix" ng-repeat="logbook in getlogbook| filter : search | orderBy:'-timestamp'" ng-if="logbook.category_id == 0">
+                        <div class="common-redbox clearfix ">
+                            <div class="pull-left usernames" ng-init="logbook.searchName = logbook.title">{{logbook.title | limitTo: 80}}<span>{{logbook.expected_address}}</span></div>
+                        <div class="pull-right" ng-if="logbook.trip_status == 'end'">
+                            <a class="pull-left logbook-flag"><img src="assets/img/flag.png" /></a>
+                            <!--<a ui-sref="common.tripdetail({id:logbook._id})" href="javascript:;" class="pull-left logbook-flag"><i class="fa fa-flag-checkered"></i></a>-->
+                            <a ui-sref="common.tripdetail({id:logbook._id})" href="javascript:;" class="pull-left"><button type="button" title="Show Logbook" class="btn btn-gray" data-dismiss="modal">SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>
+                            <a class="logbook-flag" ng-click="deletelogbooktripdetail(logbook._id,logbook.title)"><button type="button"  title="Delete Group" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                            <input  id="box{{$index}}" class="checkBox" type="checkbox" value="{{logbook._id}}"  ng-change="checkedItems(logbook._id)" ng-checked="logbook.checked" ng-model="logbook.checked" />
+                            <label for="box{{$index}}" class="pull-right"></label>
+                            
+                        </div>
+                        <div class="pull-right" ng-if="logbook.trip_status == 'start'" style="margin-top: 7px;">
+                            <a ng-click="deletelogbooktripdetail(logbook._id,logbook.title)"><button type="button"  title="Delete Group" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                            <input  id="box{{$index}}" class="checkBox" type="checkbox" value="{{logbook._id}}"  ng-change="checkedItems(logbook._id)" ng-checked="logbook.checked" ng-model="logbook.checked" />
+                            <label for="box{{$index}}" class="pull-right"></label>
+                                
+                        </div>
+                        </div>
+                    </li>
+                    
+                    <li class="homeerror" ng-if="!resultflag || getlogbook.length == 0">No records found.</li>
+                </ul>
+
+            </div>
+            <!-- tab content2 -->
+
+
+
+        </div>
+        <!-- persnal detail -->
+    </div>
+</div>
+
+<!-- /container -->
+<!-- share modal -->

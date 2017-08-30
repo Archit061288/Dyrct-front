@@ -1,0 +1,37 @@
+ 
+          
+            <!-- modal header -->
+            <div class="modal-header">
+              <h3 class="modal-title" id="myModalLabel">Move To</h3>
+            </div>
+            <!-- modal content -->
+            <div class="modal-body" id="boxscroll3">
+              <form action="" class="">
+                <div class="row formField">
+                  <ul class="listing listing2">
+                      <li class="clearfix" ng-if="categorydata._id != currentcategoryid"  ng-repeat="categorydata in categorydata">
+                          <div class="pull-left usernames"><h4 class="panel-title move-log-icon2">{{categorydata.category_name}}</h4></div>
+                      <div class="pull-right">
+                          <input id="box{{$index +'category'}}" type="radio" name="namelogbook" value="{{categorydata._id}}" ng-checked="categorydata.checked" ng-model="categorydata.checked" ng-click="checkedItems(categorydata._id)">
+                        <!--<input id="box{{$index}}" class="checkBox" name="contact" type="checkbox" ng-checked="contact.Selected" ng-model="contact.Selected">-->
+                        <label for="box{{$index +'category'}}"></label>
+                      </div>
+                    </li>
+                    <li class="homeerror" ng-if="categorydata.length<=1 && check == 'category'">No records found.</li>
+                   <li class="homeerror" ng-if="categorydata.length==0">No records found.</li>
+                  </ul>
+                </div>
+              </form>
+            </div>
+            <!-- modal footer -->
+            <div class="modal-footer mdBdr-none">
+              <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default" ng-if="check == 'category'" ng-click="moverecent()">Move to Recent Trips</button>
+                  <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+                  <button type="button" class="btn btn-danger" ng-disabled="categorydata.length<=1 && check == 'category'" ng-click="move()">Move</button>
+                </div>
+              </div>
+            </div>
+          
+        

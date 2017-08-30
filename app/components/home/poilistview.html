@@ -1,0 +1,230 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-3 col-sm-1 hidden-xs">
+            <a href="javascript:void(0)" class="homeIcon" ng-if="!poiice">ICE</a>
+            <a href="javascript:void(0)" class="homeIcon" ng-if="poiice">PLACES</a>
+        </div>
+        <div class="col-md-5 col-sm-7 col-xs-9 text-left tabs-middle mapviewtab">
+            <ul class="nav nav-tabs" role="tablist">
+                <!-- <li role="presentation" title="PEOPLE"  ui-sref-active="active"><a ui-sref="common.home" >PEOPLE</a></li>
+                <li role="presentation" title="PLACES"  ui-sref-active="active"><a ui-sref="common.poilistview"  >PLACES</a></li>
+                <li role="presentation" title="ICE"  ui-sref-active="active"><a ui-sref="common.icelistview"  >ICE</a></li> -->
+                <!--<li role="presentation" title="Recent Trips"  ui-sref-active="active"><a ui-sref="common.recenttrip" >Recent Trips</a></li>-->
+            </ul>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-3 text-center selectview" >
+            <div class="btn-group bootstrap-select" ng-class="{'open':open}" style="margin-top: -3px;background-color: #fff;" ng-show="poiice">
+                <button ng-click="toggleselect()" type="button" class="btn dropdown-toggle listview" data-toggle="dropdown" data-id="selectBox" title="map view" aria-expanded="false">
+                    <a ui-sref="common.poilistview" ui-sref-active="active"><span class="filter-option pull-left">List View</span>
+                        <span class="glyphicon glyphicon-list"></span>
+                    </a>
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu open" style="background-color: #fff;">
+                    <ul class="dropdown-menu inner" role="menu">
+
+
+                        <li data-original-index="1" style="background-color: #fff;">
+                            <a ui-sref="common.mapview" tabindex="0" class="" style="text-align: left;" data-tokens="null">
+                                <span class="text" >Map View</span>
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <toaster-container toaster-options="{'time-out': 1200, 'close-button':true}"></toaster-container>
+        
+        <div class="col-md-2 col-sm-2 col-xs-2 text-right buttonbox-right home" ng-show="poiice">
+            <button data-dismiss="modal" ui-sref="common.poi" title="Create Address"  class="btn btn btn-danger small-btn" type="button">
+                <span class="btn-text">Create Address</span>
+                <i class="glyphicon glyphicon-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12" id="boxscroll2" getheight="userpoi">
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+            <div  ui-sref-active="active">
+                <ul class="listing dyrct_popup_listing postList" id="dyrct_popup_listing">
+                    <li class="clearfix padd0" ng-if="globalpoi && poiice && poi.status == 'active' && poi.ice_flag=='false'" ng-repeat="poi in userpoi | orderBy: 'title' | filter:search">
+                        <div class="common-redbox clearfix">
+                            <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" height="45" width="45"  ng-src="{{poi.poi_pic}}" alt=""></div>
+                            <div class="pull-left usernames" ng-init="poi.searchName=poi.title">{{poi.title}}<span>{{poi.address}}</span></div>
+
+                            <div class="btn-hover">
+                                <a ng-click="dyrctshow(poi,$index,'poi')">
+                                    <button type="button" title="Show POI"  class="btn btn-gray dyrct_popup_btn dyrct_popup_btnd_{{$index}}" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                                </a>
+                                <!--<a ng-click="openModalshow('poi',poi);"><button type="button" class="btn btn-gray" data-dismiss="modal">SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>-->
+                                <!--<button popover-placement="left" uib-popover-template="myPopover.templateUrl" ng-click="showdatapoi(poi)" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-gray" data-dismiss="modal">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+                                <!--</a>-->
+                                <a ng-click="openModalshare('poi', poi.poi_id);" analytics-on="click" analytics-event="Share POI" analytics-category="Share POI" analytics-label="Share POI"><button type="button" title="Share Address"  class="btn btn-gray share-icon" data-target=".share" data-toggle="modal"><img src="assets/img/icon01.png" height="19" width="14" alt=""></button></a>
+                                <a ui-sref="common.epoi({id:poi.poi_id})"><button type="button" title="Edit Address"  class="btn btn-gray edit edit2"></button></a>
+                                <a ng-click="deletepoi(poi.poi_id,'poi')"><button type="button" title="Delete Address"  class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                                <a ng-click="openModalpoimove('true','POI',poi.poi_id,poi.title)">
+                        <button type="button"  title="addfolder" class="btn btn-gray dyrct_popup_btn" >Add to Folder</button>
+                    </a>
+                            </div>
+                        </div>
+                    </li>
+                   
+                    <li class="clearfix padd0"  ng-if="globalpoi && !poiice && poi.status == 'active' && poi.ice_flag==true" ng-repeat="poi in userpoi | orderBy: 'timestamp':true | filter:search">
+                        <div class="common-redbox clearfix">
+                            <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" height="45" width="45"  ng-src="{{poi.poi_pic}}" alt=""></div>
+                            <div class="pull-left usernames" ng-init="poi.searchName=poi.title">{{poi.title}}<span>{{poi.address}}</span></div>
+
+                            <div class="btn-hover">
+                                <a ng-click="dyrctshow(poi,$index,'ice')">
+                                    <button type="button" title="Show POI"  class="btn btn-gray dyrct_popup_btn dyrct_popup_btnd_{{$index}}" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                                </a>
+                                <!--<a ng-click="openModalshow('poi',poi);"><button type="button" class="btn btn-gray" data-dismiss="modal">SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>-->
+                                <!--<button popover-placement="left" uib-popover-template="myPopover.templateUrl" ng-click="showdatapoi(poi)" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-gray" data-dismiss="modal">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+                                <!--</a>-->
+                                <a ng-click="deletepoi(poi.poi_id,'ice')"><button type="button" title="Delete Address"  class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                                
+                            </div>
+                        </div>
+                    </li>
+                    <li class="clearfix padd0" ng-if="!globalpoi" ng-repeat="poidata in userglobalpoi">
+                        <div class="common-redbox clearfix">
+                            <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" height="45" width="45"  ng-src="{{poidata.poi_pic}}" alt=""></div>
+                            <div class="pull-left usernames" ng-init="poidata.searchName=poidata.title">{{poidata.title}}<span>{{poidata.address}}</span></div>
+
+                            <div class="btn-hover">
+                                <button data-dismiss="modal" class="btn btn btn-danger small-btn pull-right" type="button" ng-click="addpoi(poidata.title,poidata.address,poidata.latitude,poidata.longitude)" analytics-on="click" analytics-event="CREATE POI" analytics-category="CREATE POI" analytics-label="CREATE POI">Save in PLACES</button>
+                                
+                    </a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="homeerror" ng-if="!resultflag || userpoilen">No records found.</li>
+                    <!--<li class="homeerror" ng-if="">No Record Found</li>-->
+                </ul>
+            </div>
+            
+        </div>
+        <!-- persnal detail -->
+    </div>
+</div>
+<div class="dyrct_popup" id="dyrct_popup" ng-if="showpopover">
+    <div class="popup_bg" ng-click="closepopup(usercontactshowdata.poi_id, 'poi')"></div>
+    <div class="custom_popup">
+        <div class="arrow_black"></div>
+        <div class="content_left">
+           <div class="col-sm-12">
+            <div class="form-group">
+                <div class="imgBlock">
+                    <input id="profile_picture" type="file" name="profile_pic" title="Upload Image"  file-model="profobj.profile_pic"/>
+                    <img class="fullimage" src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.poi_pic != '' && usercontactshowdata.poi_pic || 'assets/img/user_profile.png'}}" alt="" ng-show="!imgupl">
+                    <div ng-show="imgupl">
+                        <div class="right-col-3 spinner-wrapper">
+                            <div id="spinner" >
+                                <div class="loader" >
+                                    <img ng-src="assets/img/loader_outer.png">
+                                </div>
+                                <div class="center-loader">
+                                    <img ng-src="assets/img/loader-center.png" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label for="profile_picture" title="Upload Image" class="btn btn-default upload-btnplaces">Replace picture</label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="">
+                    <div class="title-name">{{usercontactshowdata.title}}</div>
+                    <div class="divider"></div>
+                    <div class="title-email">{{usercontactshowdata.email}}</div>
+                    <div class="title-address">{{usercontactshowdata.address}}</div>
+                    <div class="title-phone" ng-hide="usercontactshowdata.phone == ''">Phone - {{usercontactshowdata.phone}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_right">
+      <!--   <div class="col-sm-12 notes text-left">Add Notes 
+                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(usercontactshowdata.contact_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>
+                        
+                    </div> -->
+                    <div class="col-sm-12 notes-text">
+                     <h6>Add Private Note</h6>
+                         <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.note" ng-focus="focus()" ng-blur="blur()" class="form-control height100folder"></textarea>
+                             <h6>Add Public Note</h6>
+                        <textarea cols="50" rows="5" ng-change="changeusertype()" ng-model="usercontactshowdata.public_note" ng-focus="focus()" ng-blur="blur()" class="form-control height100folder"></textarea>
+                   
+                    <h6>Add Phone</h6>
+    <input type="text"  showonly-digits ng-change="changeusertype()" ng-model="usercontactshowdata.phone" ng-focus="focus()" ng-blur="blur()" class="form-control height100foldertext">                   
+<!--                        <input type="text" showonly-digits  ng-change="changeusertype()" ng-model="usercontactshowdata.phone" ng-focus="focus()" ng-blur="blur()" class="form-control remove-border-show poi-notes-phone-url"  placeholder="Add Phone"/>-->
+                       <h6>Add Url</h6>
+    <input type="text"  ng-change="changeusertype()" ng-model="usercontactshowdata.url" ng-focus="focus()" ng-blur="blur()" class="form-control height100foldertext">                   
+                        
+                       
+                        
+                    </div>
+                    <!--<div class="col-sm-12 notes text-left">Phone</div>-->
+<!--                    <div class="form-group form-inline">
+                        <input type="text" showonly-digits  ng-change="changeusertype()" ng-model="usercontactshowdata.phone" ng-focus="focus()" ng-blur="blur()" class="form-control remove-border-show poi-notes-phone-url"  placeholder="Add Phone"/>
+                       
+                    </div>
+                    <div class="col-sm-12 notes text-left">URL</div>
+                    <div class="form-group">
+                        <a ng-click="toggleurl()" class="pull-right"><button type="button" title="Edit POI"  class="btn btn-gray edit edit2" style="width: 16px;height: 16px; padding:15px; margin:9px;"></button></a>
+                        <input ng-show="urlactive" type="text"  ng-change="changeusertype()" ng-model="usercontactshowdata.url" ng-focus="focus()" ng-blur="blur()" class="form-control remove-border-show poi-notes-phone-url"  placeholder="Add Url"/>
+                        <p ng-show="!urlactive" ng-bind-html="usercontactshowdata.url | linky:'_blank'" class="poi-notes-phone-url poi-linky"></p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+<div class="dyrct_popup" id="dyrct_popup" ng-if="icepopover">
+    <div class="popup_bg" ng-click="closeicepopup()"></div>
+    <div class="custom_popup">
+        <div class="arrow_black"></div>
+        <div class="content_left">
+           <div class="col-sm-12">
+            <div class="form-group">
+                <div class="imgBlock">
+                    <img class="fullimage" src="assets/img/user_profile.png" ng-src="{{usercontactshowdata.poi_pic != '' && usercontactshowdata.poi_pic || 'assets/img/user_profile.png'}}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="">
+                    <div class="title-name">{{usercontactshowdata.title}}</div>
+                    <div class="divider"></div>
+                    <div class="title-email">{{usercontactshowdata.email}}</div>
+                    <div class="title-address">{{usercontactshowdata.address}}</div>
+                    <div class="title-phone" ng-hide="usercontactshowdata.phone == ''">Phone - {{usercontactshowdata.phone}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content_right1">
+        <div class="col-sm-12 notes text-left">Message 
+<!--                        <div class="option-buttons">
+                            <a href="javascript:void(0)" ng-click="addnote(usercontactshowdata.contact_id, check)" class="ob-save-btn" ng-mouseenter="focus()" ng-show="showstatus"><img src="assets/img/btn_accept.png" width="14px" height="14px" alt="btn" /></a>
+                            <a href="javascript:void(0)" ng-click="cancel()" class="ob-close-btn" ng-show="!showstatus"><img src="assets/img/btn_deny.png" width="14px" height="14px" alt="btn" /></a>
+                        </div>-->
+                        
+                    </div>
+                    <div class="col-sm-12 notes-text">
+                        <textarea cols="30" rows="5" readonly ng-change="changeusertype()" ng-model="usercontactshowdata.ice_message" ng-focus="focus()" ng-blur="blur()" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,174 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName" class="ng-hide">
+<div class="tab-block">
+  <div class="row">
+    <div class="col-xs-12 visible-xs">
+      <h3 class="text-center">Folders</h3>
+    </div>
+    <div class="col-md-6 col-sm-6 hidden-xs" ng-if="!subfolderactive">
+      <a  class="foldersIcon">Folders</a>
+    </div>
+       <div class="col-md-3 col-sm-1 col-xs-3" ng-if="subfolderactive">
+            <a><button type="button" title="Back To Folder"  class="btn btn-gray" ng-click="back()">Back</button></a>
+        </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 text-right buttonbox-right home">
+      <button  class="btn btn btn-danger small-btn" type="button" ng-if="localfolderlist"  title="Create New Folder" ng-click="openModalfolder(0,'','','','create')">
+        <span class="btn-text">Create New</span>
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+  <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="folderlist">
+    <ul class="listing folder">
+
+      <li class="clearfix text-center padd0 listingli-noBG" ng-if="folder.status=='active' && localfolderlist == false && subfolderactive == false" ng-repeat="folder in searchFolderData | orderBy:'folder_name'">
+       <div class="common-redbox">
+        <div class="row">
+          <div class="col-md-12 content-text">
+           
+              <a ng-click="getsubfolderlist(folder.folder_id,1)" >
+            <span class="pull-left col-md-8">
+              <div class="folder01 text-left" ng-init="folder.searchName=folder.folder_name">{{folder.folder_name}} </div>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid > 0 && folder.No_of_Sub_folder > 0">'{{folder.No_of_poi_cid}} Entries' '{{folder.No_of_Sub_folder}} Subfolders'</span>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid == 0 && folder.No_of_Sub_folder == 0">'No Entries' 'No Subfolders'</span>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid == 0 && folder.No_of_Sub_folder > 0">'No Entries' '{{folder.No_of_Sub_folder}} Subfolders'</span>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid > 0 && folder.No_of_Sub_folder == 0">'{{folder.No_of_poi_cid}} Entries' 'No Subfolders'</span>
+<!--              <span class="subFolder text-left">&nbsp </span>              -->
+            </span>
+                 <span class="pull-left col-md-8">
+                      <div class="subFolder text-left"><span class="state-text">{{folder.hash_tag}}</span></div>
+                  </span>
+              <span class="subFolder pull-right createdBy new">Created By: {{folder.created_owner}}</span>
+            </a>
+          </div>
+          
+          <div class="btn-hover">
+            <a ng-click="saveFolder(folder.folder_id,folder.folder_name,folder.created_owner_id)"><button type="button"  title="Save" class="btn btn-gray">Save</button></a>
+          </div>
+        </div>
+        </div>
+      </li>
+      
+      <li class="clearfix text-center padd0 listingli-noBG" ng-if="subfolderactive" ng-repeat="subfolder in subfolderlist| filter:search.searchName | orderBy:'folder_name'">
+                <div class="common-redbox">
+                <div class="row">
+                   
+                    <div class="col-md-12 content-text"> 
+                         <a ng-click="getsubfolderlist(subfolder.folder_id,2)">
+                        <span class="pull-left col-md-8">
+                        <div class="folder01 text-left" ng-init="subfolder.searchName = subfolder.folder_name">{{subfolder.folder_name}}</div>                        
+
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID > 0 && subfolder.No_of_subfolder > 0">'{{subfolder.No_of_POI_CID}} Entries' '{{subfolder.No_of_subfolder}} Subfolders'</span>
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID == 0 && subfolder.No_of_subfolder == 0">'No Entries' 'No Subfolders'</span>
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID == 0 && subfolder.No_of_subfolder > 0">'No Entries' '{{subfolder.No_of_subfolder}} Subfolders'</span>
+                            <span class="subFolder text-left" ng-if="subfolder.No_of_POI_CID > 0 && subfolder.No_of_subfolder == 0">'{{subfolder.No_of_POI_CID}} Entries' 'No Subfolders'</span>
+
+
+                        </span>
+                             <span class="pull-left col-md-8">
+                      <div class="subFolder text-left"><span class="state-text">{{subfolder.hash_tag}}</span></div>
+                  </span>
+              <span class="subFolder pull-right createdBy new">Created By: {{subfolder.created_owner}}</span>
+                        </a>
+                        
+                    </div>
+                        <div class="btn-hover">
+            <a ng-click="saveFolder(subfolder.folder_id,subfolder.folder_name,subfolder.created_owner_id)"><button type="button"  title="Save" class="btn btn-gray">Save</button></a>
+          </div> 
+<!--                    <div class="btn-hover">
+                        <a ng-if="subfolder.isVisible" ng-click="openModaladdcidfolder(subfolder.folder_id, subfolder.folder_name, currentfolderdata.folder_name, subfolder.folder_name)"><button type="button" title="Add CID/POI" class="btn btn-gray"><i class="glyphicon glyphicon-plus"></i></button></a>
+                        <a ng-click="openModalsharefolder(subfolder.folder_id, currentfolderdata._id, 'subfolder')"><button type="button" title="Share Sub folder" class="btn btn-gray share-icon"><img src="assets/img/icon01.png" alt=""></button></a>
+                        
+                        <a ng-if="subfolder.isVisible" ng-click="openModalfolder(subfolder.folder_id, subfolder.folder_name, currentfolderdata.folder_name, subfolder.folder_name,subfolder.hash_tag,subfolder.lock_folder)"><button type="button" title="Edit Sub folder" class="btn btn-gray edit edit2"></button></a>
+                        
+                        <a ng-click="deletefolder(subfolder.folder_id,subfolder.folder_name)"><button type="button" title="Delete Sub folder" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                        <a ng-if="subfolder.isVisible" ng-click="openModalmove(currentfolderdata._id,subfolder.folder_id,subfolder.folder_name,'false','subfolder')">
+                        <button ng-if="!subfolder.lock_folder" type="button"  title="Move Sub folder" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                        
+                    </a>
+                    </div>-->
+                </div>
+                </div>
+            </li>
+            
+            <li class="clearfix padd0 listingli-noBG" ng-if="subfolderactive" ng-repeat="folderpoicontactslist in folderpoicontactslist | filter:search.searchName | orderBy:'title'">
+                 <div class="common-redbox clearfix ">
+                     <div class="row">
+                   
+                    <div class="col-md-12 content-text"> 
+                        <div class="pull-left usernames paddTop0 folder-cidpoi-listing">
+                     <i class="location"></i>{{folderpoicontactslist.title}}
+                    <span>{{folderpoicontactslist.address}}</span>
+                </div>
+                    </div>
+<!--                         <div class="btn-hover">
+                                        <a  ng-click="openModalshow('folder',folderpoicontactslist.share_type,folderpoicontactslist.share_type_id)"><button type="button" class="btn btn-gray" data-dismiss="modal" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button></a>
+                                        <button class="btn btn-default" tooltip="{{templateUrl}}" tooltip-trigger="click" ng-click="showtooltip()">click</button>
+                    <a  ng-click="openModalshow('folder', folderpoicontactslist,$index)">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn dyrct_popup_btnd_{{$index}}" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                    </a>
+                    <button popover-placement="left" uib-popover-template="templateUrl"  type="button" class="btn btn-gray" data-dismiss="modal" ng-click="openModalshow('folder', folderpoicontactslist.share_type, folderpoicontactslist.share_type_id)">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+                    <a ng-click="deletefolderpoicontacts(folderpoicontactslist.id, folderpoicontactslist.folder_id)" analytics-on="click" analytics-event="Delete CID/POI" analytics-category="Delete CID/POI" analytics-label="Delete Folder CID/POI"><button type="button"  title="Delete" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+                    <a ng-if="isVisible" ng-click="openModalmovepoi(folderpoicontactslist.id,folderpoicontactslist.folder_id,folderpoicontactslist,'false',folderpoicontactslist.share_type)">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                    </a>
+                    <a ng-if="isVisible" ng-click="openModalsharecidpoi(folderpoicontactslist.share_type, folderpoicontactslist.share_type_id, folderpoicontactslist.id)" analytics-on="click" analytics-event="Share CID/POI" analytics-category="Share CID/POI" analytics-label="Sahre Folder CID/POI">
+                        <button type="button" title="Share CID" class="btn btn-gray share-icon" data-target=".share" data-toggle="modal"><img src="assets/img/icon01.png" height="19" width="14" alt=""></button>
+                    </a>
+                    <a ng-if="isVisible" ng-click="openModalsavepoi(folderpoicontactslist.share_type,folderpoicontactslist.share_type_id)" analytics-on="click" analytics-event="Save CID/POI" analytics-category="Save CID/POI" analytics-label="Save Folder CID/POI">
+                        <button type="button"  title="Show" class="btn btn-gray dyrct_popup_btn" >Save PEOPLE/PLACES</button>
+                    </a>
+                         </div>-->
+                     </div>
+                     
+                
+                
+               </div>
+            </li>
+<li class="homeerror" ng-show="resultsubfolderlist">No records found.</li>
+
+      <li class="clearfix text-center padd0 listingli-noBG" ng-if="folder.status=='active' && localfolderlist" ng-repeat="folder in folderlist | filter:search.searchName | orderBy:'folder_name'">
+       <div class="common-redbox">
+        <div class="row">
+          <div class="col-md-12 content-text">
+           
+              <a ui-sref="common.subfolder({id:folder.folder_id})" >
+                  <span class="pull-left col-md-8">
+              <div class="folder01 text-left" ng-init="folder.searchName=folder.folder_name">{{folder.folder_name}} </div>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid > 0 && folder.No_of_Sub_folder > 0">'{{folder.No_of_poi_cid}} Entries' '{{folder.No_of_Sub_folder}} Subfolders'</span>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid == 0 && folder.No_of_Sub_folder == 0">'No Entries' 'No Subfolders'</span>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid == 0 && folder.No_of_Sub_folder > 0">'No Entries' '{{folder.No_of_Sub_folder}} Subfolders'</span>
+              <span class="subFolder text-left" ng-if="folder.No_of_poi_cid > 0 && folder.No_of_Sub_folder == 0">'{{folder.No_of_poi_cid}} Entries' 'No Subfolders'</span>
+                  </span>
+                  <span class="pull-left col-md-8">
+                      <div class="subFolder text-left"><span class="state-text">{{folder.hash_tag}}</span></div>
+                  </span>
+              <span class="subFolder pull-right createdBy new">Created By: {{folder.created_owner}}</span>
+            </a>
+             
+          </div>
+          <div class="btn-hover">
+            <a ng-if="folder.isVisible" ng-click="openModalAddcid(folder.folder_id,folder.folder_name)"><button type="button"  title="Add CID/POI" class="btn btn-gray"><i class="glyphicon glyphicon-plus"></i></button></a>
+            <a ng-click="openModalsharefolder(0,folder.folder_id,'folder')"><button type="button"  title="Share Folder" class="btn btn-gray share-icon"><img src="assets/img/icon01.png" alt=""></button></a>
+            <a ng-if="folder.isVisible" ng-click="openModalfolder(folder.folder_id,folder.folder_name,folder.hash_tag,folder.lock_folder)"><button type="button"  title="Edit Folder" class="btn btn-gray edit edit2"></button></a>
+            <a ng-click="deletefolder(folder.folder_id,folder.folder_name)"><button type="button"  title="Delete Folder" class="btn btn-gray delete"><i class="glyphicon glyphicon-trash"></i> </button></a>
+            <a  ng-if="folder.isVisible" ng-click="openModalmove(folder.folder_id,folder.folder_name,'true','folder')">
+                        <button type="button"  title="Move Folder" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                    </a>
+            <!--
+            <a  ng-if="folder.No_of_Sub_folder == 0 && folder.isVisible" ng-click="openModalmove(folder.folder_id,folder.folder_name,'true','folder')">
+                        <button type="button"  title="Move Folder" class="btn btn-gray dyrct_popup_btn" >Move</button>
+                    </a>
+                    -->
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="homeerror" ng-show="!resultflag">No records found.</li>
+  </ul>
+
+  <!-- persnal detail -->
+</div>
+</div>

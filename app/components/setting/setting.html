@@ -1,0 +1,135 @@
+<div class="tab-block">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <a  class="settingIcon">Settings</a>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+            <button  class="btn btn-gray" type="button" title="Reset Setting" ng-click="resetsetting()">Reset</button>
+            <button  class="btn btn-danger" type="button"  title="Save Setting" ng-click="savesetting()">Save</button>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 paddTop0" id="boxscroll2">
+
+        <!-- Start Setting Form -->
+        <div class="setting-form">
+<!--            <div class="form-group">
+                <label for="">Default Address</label>                     
+                <div class="radio-column">
+                    <div class="radio">
+                        <input type="radio" name="both" id="both" value="both" ng-model="defaultaddress">
+                        <label for="both">
+                            Both
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="public" id="public" value="public" ng-model="defaultaddress">
+                        <label for="public">
+                            Public
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="private" id="private" value="private" ng-model="defaultaddress">
+                        <label for="private">
+                            Private
+                        </label>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="form-group">
+                <label for="">Default Search</label>                      
+                <div class="radio-column">
+                    <div class="radio">
+                        <input type="radio" name="Map" id="Map" value="Map" ng-model="searchmap">
+                        <label for="Map">
+                            Map
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="List" id="List" value="List" ng-model="searchmap">
+                        <label for="List">
+                            List
+                        </label>
+                    </div>                        
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Show Profile</label>                      
+                <div class="radio-column">
+                    <div class="radio">
+                        <input type="radio" id="true" value="true" ng-model="showprofile">
+                        <label for="true">
+                            On
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" id="false" value="false" ng-model="showprofile">
+                        <label for="false">
+                            Off
+                        </label>
+                    </div>                        
+                </div>
+            </div>
+
+            <!--<button ng-click="openModalaboutus()"  title="About Us" class="btn btn-block-ctn" type="button">About Us</button>-->
+            <button ng-click="openModalblockuser()"  title="Block Contacts" class="btn btn-block-ctn" type="button"><i class="icon-block"></i>Block Contacts</button>
+            
+            <form novalidate name="settingform">
+                <div class="form-group clearfix passchange">
+                    <label for=""  class="titles " ng-click="togglepassword()">Change Password </label>
+                    <div class="row" ng-hide="!passwordsetting">
+                        <div class="col-xs-12 col-sm-11 col-md-8 col-lg-7">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 labels">
+                                    <label for=""  class="labelTitle">Old Password</label>
+                                </div>
+                                <div class="col-sm-6 p-bottom">
+                                    <input  type="password" required ng-model="oldpassword" ng-class="{'error':contacterror}" placeholder="Enter old password" name="oldpassword" class="form-control  setting-textbox">
+                                    <span  ng-show="msgerror" class="text text-danger">{{message}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-11 col-md-8 col-lg-7">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 labels">
+                                    <label for=""  class="labelTitle">New Password</label>
+
+                                </div>
+                                <div class="col-sm-6 p-bottom">
+                                    <input  type="password" required id="newpassword" ng-model="newpassword" name="newpassword" ng-class="{'error':contacterror}" placeholder="Enter new password" name="newpassword" class="form-control setting-textbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-11 col-md-8 col-lg-7">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 labels">
+                                    <label for=""  class="labelTitle">Confirm Password</label>
+
+                                </div>
+                                <div class="col-sm-6 p-bottom">
+                                    <input type="password" required id="password_c" name="password_c" data-password-verify="newpassword"  ng-model="password_c" ng-class="{'error': contacterror}" class="form-control setting-textbox"  placeholder="Enter password here">
+                                    <span ng-show="settingform.password_c.$error.passwordVerify" class="text text-danger">Password do not match</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-11 col-md-8 col-lg-7 savebtn">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" ng-click="settingpassword()" class="btn btn-block-ctn">Save Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End Setting Form -->
+
+    </div>
+</div>

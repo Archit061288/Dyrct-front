@@ -1,0 +1,41 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName.group_name" class="ng-hide">
+<div class="tab-block">
+    <div class="row">
+       <div class="col-md-6 col-sm-6 hidden-xs">
+            <a class="fa fa-bell-o"> Notification History</a>
+        </div>
+
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="grouplist" when-scrolled="notificationhistorylistfun()">
+        <ul class="listing dyrct_popup_listing">
+                        <li class="clearfix padd0" ng-repeat="data in notificationhistorylist">
+                            <div class="common-redbox clearfix">
+                                <div  class="pull-left usernames" >{{data.message}}</div>
+                                <div  class="btn-hover notification-pendingstatus" ng-if="data.notification_status == 'pending' || data.notification_status == ''">
+                                    <a href="javascript:void(0)"   ng-click="updatenotification(data.notification_id,'block')"><button type="button"  title="" class="btn glyphicon glyphicon-ban-circle notification-block notification-btn" data-target=".send" ></button></a>
+                                    <a href="javascript:void(0)"  ng-click="updatenotification(data.notification_id,'reject')"><button type="button"  title="" class="btn glyphicon glyphicon-remove notification-reject notification-btn" data-target=".send" ></button></a>
+                                    <a href="javascript:void(0)"  ng-click="updatenotification(data.notification_id,'accept')"><button type="button"  title="" class="btn glyphicon glyphicon-ok notification-accept notification-btn" data-target=".send" ></button></a>
+                                </div>
+                                <div class="pull-right">
+                                    <a target="_top" ng-if="data.notification_status == 'accept'" class="pull-left notification-accept">Accepted <i class="glyphicon glyphicon-ok notification-accept"></i></a>
+                                    <a target="_top" ng-if="data.notification_status == 'reject'" class="pull-left notification-reject">Rejected <i class="glyphicon glyphicon-remove notification-reject"></i></a>
+                                    <a target="_top" ng-if="data.notification_status == 'block'" class="pull-left notification-block">Block <i class="glyphicon glyphicon-ban-circle notification-block"></i></a>
+                                    <a target="_top" ng-if="data.notification_status == 'pending'|| data.notification_status == ''" class="pull-left notification-pending">Pending</a>
+                                </div>
+                            </div>
+                            </li>
+                            <li class="homeerror" ng-if="notificationhistorylist.length == 0">No records found.</li>
+                        </ul>
+        <!--<uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="items_per_page" ng-change="pageChanged(currentPage)" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>-->
+        <!--<uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="items_per_page" ng-change="pageChanged(currentPage)"></uib-pagination>-->
+        <!--<uib-pagination direction-links="true" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages" items-per-page="items_per_page" ng-change="pageChanged(currentPage)"></uib-pagination>-->
+
+    <!-- persnal detail -->
+</div>
+</div>
+
+<!-- /container -->
+<!-- create group modal -->

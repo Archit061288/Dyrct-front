@@ -1,0 +1,39 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="q.group_data.title" class="ng-hide">
+<div class="tab-block">
+              <div class="row">
+                <div class="col-md-3 col-sm-1 col-xs-1">
+                    <button type="button" class="btn btn-gray" title="Back" ng-click="back()">Back</button>
+               </div>
+               <div class="col-md-6 col-sm-8 col-xs-8 text-center">
+                <h5>Message Detail</h5>
+              </div>
+              
+            </div>
+          </div>
+          <div class="clearifx"></div>
+          <div class="right-col">
+            <div class="wideColume col-md-12 paddTop0" id="boxscroll2">
+              <ul class="listing groupHistory">
+<!--                  <li class="clearfix" ng-repeat="grouphistory in grouphistory">
+                  <div class="row">
+                      <div class="pull-left usernames">{{grouphistory.group_name}} </div>
+                    <div class="col-md-6 usernames paddTop0 padd-left-right">{{grouphistory.group_name}}<span>{{grouphistory.totalMember}} Member</span></div>
+                    <div class="col-md-6 text-right">
+                      <span class="group-history text-left">{{grouphistory.modified_date*1000 | date:'dd-MM-yyyy'}}</span>
+                    </div>
+
+                  </div>
+                </li>-->
+                    <li class="clearfix" ng-repeat="groupstatus in groupstatus | filter:q">
+                    <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{groupstatus.profile_pic}}" height="45" width="45" alt=""></div>
+                    <div class="pull-left usernames">{{groupstatus.name}}</div>
+                    <div class="pull-right">
+                        <p ><span ng-if="groupstatus.status == 'Pending'" style="color:orangered;">Pending</span><span ng-if="groupstatus.status == 'Accepted'" style="color:green;">Accepted</span><span ng-if="groupstatus.status == 'Rejected'" style="color:red;">Rejected</span></p>
+                    </div>
+                </li>
+              </ul>
+
+              <!-- persnal detail -->
+            </div>  
+          </div>
+     

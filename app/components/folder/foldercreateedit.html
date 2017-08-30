@@ -1,0 +1,108 @@
+          
+<!-- modal header -->
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title" id="myModalLabel" ng-show="!folderid">Create Folder</h3>
+    <h3 class="modal-title" id="myModalLabel" ng-show="folderid">Update Folder</h3>
+    
+    <div class="row folder-create">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input required type="text" ng-class="{'error': foldrcrt }" maxlength="80" placeholder="Folder name..." name="foldername" ng-model="foldername" class="form-control">
+                <button ng-show="folderlock" type="button" class="btn btn-default" ng-click="lockUnlockFolder('unlock')">
+                    <img src="assets/img/folder-lock.png">                    
+                </button>
+                <button ng-show="!folderlock" type="button" class="btn btn-default" ng-click="lockUnlockFolder('lock')">                        
+                    <img src="assets/img/folder-unlock.png">                      
+                </button>
+                <span  ng-show="foldrcrt" class="text text-danger">{{messageerror}}</span>
+            </div>
+        </div>
+        <div class="col-md-6" >
+            <div class="form-group">
+                <input type="text" ng-model="subfoldername" name="subfoldername" maxlength="80" ng-disabled="folderid" placeholder="Sub folder name..."  ng-model="subfoldername" class="form-control">
+                <button ng-disabled="folderlock" ng-disabled="folderid" ng-show="subfolderlock" type="button" class="btn btn-default" ng-click="lockUnlockSubFolder('unlock')">
+                    <img src="assets/img/folder-lock.png">                    
+                </button>
+                <button ng-disabled="folderlock" ng-disabled="folderid" ng-show="!subfolderlock" type="button" class="btn btn-default" ng-click="lockUnlockSubFolder('lock')">                        
+                    <img src="assets/img/folder-unlock.png">                      
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <tags-input  min-length="3" max-length="21" setTextAutosizeThreshold="20" add-on-space="true"  ng-model="foldertag" placeholder="Enter #tag" allowed-tags-pattern="^.+$"></tags-input>
+                <span  class="text text-danger">{{messagetag}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="titleBlock m-top20">
+        <div class="row">
+            <div class="col-md-6" >Select <a  href="javascript:void(0)" style="color: #585757;"><span ng-class="{'contactactive':showdata}" ng-click="displaycontactdata('CID')">Contact</span></a> / <a href="javascript:void(0)"  style="color: #585757;"><span ng-class="{'poiactive':!showdata}" ng-click="displaypoidata('POI')">Address</span></a></div>
+
+            <div class="col-md-6 text-right">
+                <input type="text" ng-model="search.searchName" placeholder="Search here..">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal content -->
+<div class="modal-body" id="boxscroll3" >
+    <div class="spinner-wrapper"  ng-show="loader"> 
+<div id="spinner1">
+                <div class="loader" >
+                    <img ng-src="assets/img/loader_outer.png">
+                </div>
+                <div class="center-loader">
+                    <img ng-src="assets/img/loader-center.png" >
+                </div>
+</div>
+</div>
+    <form action="" class="" ng-show="showdata" >
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" ng-show="contact.isUsingDYRCT == 'true'" ng-if="contact.userId != MyCID._id.$id && contact.profile_visibilty_flag == 'true'" ng-repeat="contact in contactdata| filter:search.searchName | orderBy:'firstName'">
+                    <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{contact.profile_pic}}" height="45" width="45" alt=""></div>
+                    <div class="pull-left usernames" >{{contact.firstName}} {{contact.lastName}}</div>
+                    <div class="pull-right">
+                        <input id="box{{$index + 'contact'}}" class="checkBox" type="checkbox" value="{{contact.userId}}" ng-checked="contact.checked" ng-model="contact.checked" ng-click="checkedcontactItems(contact.userId,contact.checked)">
+                        <label for="box{{$index + 'contact'}}"></label>
+                    </div>
+                </li>
+<li class="homeerror" ng-if="!resultflag || contactdata.length==0">No Contact / Address selected</li>
+            </ul>
+        </div>
+    </form>
+    <form action="" class="" ng-show="!showdata">
+        <div class="row formField">
+            <ul class="listing listing2">
+                <li class="clearfix" ng-show="poi.status == 'active'" ng-repeat="poi in poidata| filter:search.searchName | orderBy:'title'">
+                    <!--<div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{poi.poi_pic}}" height="45" width="45" alt=""></div>-->
+                    <div class="pull-left usernames" ng-init="poi.searchName=poi.title">{{poi.title}}<span>{{poi.address}}</span></div>
+                    <div class="pull-right">
+                        <input id="box{{$index + 'poi'}}" class="checkBox" type="checkbox" value="{{poi.poi_id}}" ng-checked="poi.checked" ng-model="poi.checked" ng-click="checkedpoiItems(poi.poi_id,poi.checked)">
+                        <label for="box{{$index + 'poi'}}"></label>
+                    </div>
+                </li>
+<li class="homeerror" ng-if="!resultflagpoi || poidata.length==0">No records found.</li>
+            </ul>
+        </div>
+    </form>
+</div>
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <div class="col-md-12 buttonbox">
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel </button>
+            <button type="button" class="btn btn-danger" ng-show="!folderid" ng-click="createfolder()"  analytics-on="click" analytics-event="Create Folder" analytics-category="Create Folder" analytics-label="Create Folder">Create</button>
+            <button type="button" class="btn btn-danger" ng-show="folderid" ng-click="updatefolder()">Update</button>
+        </div>
+    </div>
+</div>
+

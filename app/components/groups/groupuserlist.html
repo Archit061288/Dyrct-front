@@ -1,0 +1,79 @@
+<input type="search" name="" id="" placeholder="Search here.." ng-model="search.searchName.name" class="ng-hide">
+<div class="tab-block groupuserlist">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-4 first-btn">
+            <a ui-sref="common.groups"><button type="button" title="Back" class="btn btn-gray">Back</button></a>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4 text-center">
+            <h5>{{onegrouplist.group_name}}</h5>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4 text-right last-btn">
+            <button class="btn btn-danger" title="Leave" ng-if="grouphistory[0].created_by != MyCID._id.$id" ng-click="leavegroup(onegrouplist._id)">Leave</button>
+            
+            <a ui-sref="common.grouphistory({id:onegrouplist._id})" class="buttonbox-right home">
+                <button type="button" class="btn btn-gray" title="Group History" data-target=".createGroup">
+                    <span class="btn-text">Group History</span>
+                    <i class="glyphicon glyphicon-time"></i>
+                </button>
+            </a>
+            
+        </div>
+
+
+    </div>
+</div>
+<div class="clearifx"></div>
+<div class="right-col">
+    <div class="wideColume col-md-12 paddTop0" id="boxscroll2" getheight="grouphistory">
+        <ul class="listing groupHistory">
+            <li class="clearfix padd0" >
+               <div class="common-redbox clearfix">
+                    <div class="row">
+                        <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{grouphistory[0].profile_pic}}" height="45" width="45" alt=""></div>
+                        <div class="pull-left usernames">{{grouphistory[0].name}}</div>
+                        <!--<div class="col-md-6 usernames paddTop0 padd-left-right">Andrew Tucker <span>Address, CA, +1 900944</span></div>-->
+                        <div class="col-md-6 text-right pull-right">
+                            <!--<img src="assets/img/group_admin.png" height="24" width="24" alt="" ng-if="grouphistory[0].created_by == grouphistory[0].userId"/>-->
+<!--                      <span class="group-history text-left">17 July 2015</span>
+    <span class="group-history text-left">09:20 am</span>-->
+</div>
+<!--<div class="btn-hover" ng-if="group.created_by == MyCID._id.$id && group.userId != MyCID._id.$id">
+    
+    <button type="button" class="btn btn-gray" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+    <button type="button" class="btn btn-gray" ng-click="openModalshow('user',grouphistory)">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>
+    <button type="button" title="Delete Group User" class="btn btn-gray delete" ng-click="deletegroupuser(group.userId,onegrouplist._id)"><i class="glyphicon glyphicon-trash"></i> </button>
+</div>-->
+
+</div>
+</div>
+</li>
+            <li class="clearfix padd0" ng-repeat="group in grouphistory | filter:search.searchName | orderBy:'name'" ng-if="group.created_by != group.userId">
+                <div class="common-redbox clearfix">
+                    <div class="row">
+                        <div class="imgBlock pull-left"><img src="assets/img/user_icon.png" ng-src="{{group.profile_pic}}" height="45" width="45" alt=""></div>
+                        <div class="pull-left usernames">{{group.name}}</div>
+                        <!--<div class="col-md-6 usernames paddTop0 padd-left-right">Andrew Tucker <span>Address, CA, +1 900944</span></div>-->
+                        <div class="col-md-6 text-right pull-right">
+<!--                      <span class="group-history text-left">17 July 2015</span>
+    <span class="group-history text-left">09:20 am</span>-->
+</div>
+<div class="btn-hover" ng-if="group.created_by == MyCID._id.$id && group.userId != MyCID._id.$id">
+    
+    <!--<button type="button" class="btn btn-gray" >SHOW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+    <!--<button type="button" class="btn btn-gray" ng-click="openModalshow('user',grouphistory)">SHOW <i class="glyphicon glyphicon-eye-open"></i></button>-->
+    <button type="button" title="Delete Group User" class="btn btn-gray delete" ng-click="deletegroupuser(group.userId,onegrouplist._id)"><i class="glyphicon glyphicon-trash"></i> </button>
+</div>
+
+</div>
+</div>
+</li>
+<li class="homeerror" ng-if="!resultflag">No records found.</li>
+
+
+
+
+</ul>
+
+<!-- persnal detail -->
+</div>
+</div>

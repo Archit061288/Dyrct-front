@@ -1,0 +1,40 @@
+          
+<!-- modal header -->
+<div class="modal-header">
+    <div class="titleBlock m-top20">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="imgBlock pull-left"><img src="assets/img/user_profile.png" ng-src="{{usercontact.profile_pic}}" alt=""></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="pull-right">
+                        <div>{{usercontact.firstName}}{{usercontact.lastName}}</div>
+                        <div>{{usercontact.email}}</div>
+                        <div>{{usercontact.address}}</div>
+                        <div>{{usercontact.phone}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<!-- modal content -->
+<div class="modal-body" >
+    <div>Notes</div>
+    <div>{{usercontact.note}}</div>
+</div>
+<!-- modal footer -->
+<div class="modal-footer mdBdr-none">
+    <div class="row">
+        <hr>
+        <div class="col-md-12 text-center">
+            <a ng-click="cancel()">Close</a>
+        </div>
+    </div>
+</div>
+
+
